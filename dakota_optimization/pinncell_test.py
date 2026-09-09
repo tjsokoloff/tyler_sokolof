@@ -148,7 +148,6 @@ print(f"Fuel radius = {fuel_or.r:.5f} cm")
 openmc.plot_geometry()
 
 print(f"Radius = {fuel_or_radius} cm")
-print(f"keff = {keff:.6f}")
 openmc.run()
 
 ############################################################################################
