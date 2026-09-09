@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+#activate TPMS-env
 from math import log10
 
 import numpy as np
@@ -69,8 +69,8 @@ fuel_or_radius = r
 print("Fuel radius =", fuel_or_radius)
 
 fuel_or = openmc.ZCylinder(r=fuel_or_radius, name='Fuel OR')
-clad_ir = openmc.ZCylinder(r=fuel_or_radius + 0.1, name='Clad IR')
-clad_or = openmc.ZCylinder(r=fuel_or_radius + 0.2, name='Clad OR')
+clad_ir = openmc.ZCylinder(r=fuel_or_radius, name='Clad IR')
+clad_or = openmc.ZCylinder(r=fuel_or_radius + 0.25, name='Clad OR')
 
 # Create a region represented as the inside of a rectangular prism
 pitch = 2.5
