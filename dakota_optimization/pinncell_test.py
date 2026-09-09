@@ -7,26 +7,6 @@ import openmc
 import sys
 import glob
 
-# Dakota files
-params_file = sys.argv[1]
-results_file = sys.argv[2]
-
-## debug
-params_file = sys.argv[1]
-results_file = sys.argv[2]
-
-print("PARAMETER FILE:", params_file)
-
-with open(params_file, 'r') as f:
-    contents = f.read()
-
-print(contents)
-
-# Read fuel radius from Dakota
-with open(params_file, 'r') as f:
-    f.readline()
-    r = float(f.readline().split()[0])
-
 openmc.config['cross_sections'] = "/workspaces/codespaces-blank/openmc-workshop/endfb-viii.0-hdf5/cross_sections.xml"
 
 
