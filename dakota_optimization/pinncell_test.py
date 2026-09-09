@@ -143,11 +143,11 @@ plot.colors = {
 plots = openmc.Plots([plot])
 plots.export_to_xml()
 
-#print(f"Fuel radius = {fuel_or.r:.5f} cm")
+print(f"Fuel radius = {fuel_or.r:.5f} cm")
 # Generate plot
-#openmc.plot_geometry()
+openmc.plot_geometry()
 
-#openmc.run()
+openmc.run()
 
 #print(f"Fuel radius = {fuel_or.r:.5f} cm")
 
