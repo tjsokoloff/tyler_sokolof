@@ -147,26 +147,10 @@ print(f"Fuel radius = {fuel_or.r:.5f} cm")
 # Generate plot
 openmc.plot_geometry()
 
+print(f"Radius = {fuel_radius:.5f} cm")
+print(f"keff = {keff:.6f}")
 openmc.run()
-
-#print(f"Fuel radius = {fuel_or.r:.5f} cm")
-
 
 ############################################################################################
-#sp_file = openmc.run()
-#with openmc.StatePoint(sp_file) as sp:
-#    keff = sp.keff.nominal_value
-openmc.run()
 
-sp_file = sorted(glob.glob("statepoint.*.h5"))[-1]
 
-with openmc.StatePoint(sp_file) as sp:
-	keff = sp.keff.nominal_value
-
-objective = -keff
-
-with open(results_file, 'w') as f:
-    f.write(f"{objective}\n")
-
-#print(f"Radius = {fuel_radius:.5f} cm")
-#print(f"keff = {keff:.6f}")
