@@ -7,7 +7,7 @@ import openmc
 import sys
 import glob
 
-openmc.config['cross_sections'] = "/workspaces/codespaces-blank/openmc-workshop/endfb-viii.0-hdf5/cross_sections.xml"
+openmc.config['cross_sections'] = "/home/tjsok/TPMS/openmc-workshop/endfb-viii.1-hdf5/cross_sections.xml"
 
 
 ###############################################################################
