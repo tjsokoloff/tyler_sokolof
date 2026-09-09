@@ -71,9 +71,9 @@ geometry.export_to_xml()
 
 # Indicate how many particles to run
 settings = openmc.Settings()
-settings.batches = 100
+settings.batches = 200
 settings.inactive = 20
-settings.particles = 4000
+settings.particles = 400000
 
 # Create an initial uniform spatial source distribution over fissionable zones
 lower_left = (-pitch/2, -pitch/2, -1)
