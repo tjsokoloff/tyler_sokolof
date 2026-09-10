@@ -44,7 +44,7 @@ materials.export_to_xml()
 # Define problem geometry
 
 # Create cylindrical surfaces
-fuel_or_radius = 0.65
+fuel_or_radius = 0.70
 
 print("Fuel radius =", fuel_or_radius)
 
