@@ -1,0 +1,29 @@
+# Dakota Input File: dakota_test.in
+# Usage:
+#   dakota -i dakota_test.in -o dakota_test.out > dakota_test.stdo>
+
+environment
+  tabular_data
+    tabular_data_file = 'dakota_test.dat'
+
+method
+  ncsu_direct
+	max_function_evaluations = 20
+	convergence_tolerance = 1e-3
+model
+  single
+
+variables
+  continuous_design = 1
+    lower_bounds     0.35
+    upper_bounds     0.99
+    descriptors       'r'
+
+interface
+  analysis_drivers = 'pinncell_dakota_test.py'
+    fork
+
+responses
+  objective_functions = 1
+  no_gradients
+  no_hessians
