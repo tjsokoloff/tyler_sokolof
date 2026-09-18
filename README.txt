@@ -1,3 +1,3 @@
 Tyler Sokoloff's repository
 
-Token: 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
+Token: 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
