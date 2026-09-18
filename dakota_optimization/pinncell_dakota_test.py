@@ -178,7 +178,7 @@ tallies.export_to_xml()
 #    keff = sp.keff.nominal_value
 openmc.run()
 
-sp_file = sorted(glob.glob("statepoint.*.h5"))[-1]
+sp_file = sorted(glob.glob("statepoint.100.h5"))[-1]
 
 with openmc.StatePoint(sp_file) as sp:
 	keff = sp.keff.nominal_value
