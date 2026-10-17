@@ -548,14 +548,14 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     f_9_cells= []
     f_10_cells= []
     f_11_cells= []
-    f_12_cells= []
-    f_13_cells= []
-    f_14_cells= []
-    f_15_cells= []
-    f_16_cells= []
-    f_17_cells= []
-    f_18_cells= []
-    f_19_cells= []
+    2_cells= []
+    3_cells= []
+    4_cells= []
+    5_cells= []
+    6_cells= []
+    7_cells= []
+    8_cells= []
+    9_cells= []
     f_20_cells= []
     f_21_cells= []
     f_22_cells= []
@@ -607,7 +607,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         upper_grid_u = openmc.Universe(cells=(lowergrid_hole_cell, upper_grid_cell))
 
         f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
+        '''f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
@@ -654,7 +654,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         f_20_cells.append(f_20.get_all_materials().keys())
         f_21_cells.append(f_21.get_all_materials().keys())
         f_22_cells.append(f_22.get_all_materials().keys())
-        f_23_cells.append(f_23.get_all_materials().keys())
+        f_23_cells.append(f_23.get_all_materials().keys())'''
         
         # Create rings of fuel universes that will fill the lattice
         ring9 = [Ref_u]*54
