@@ -13,7 +13,7 @@ from openmc import volume
 from matplotlib import pyplot as plt
 from warnings import warn
 
- Choose the algorithm: "brent", "bisection", "toms748", "newton"
+# Choose the algorithm: "brent", "bisection", "toms748", "newton"
 os.environ["TPMS_SOLVER"] = "brent"
 # Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
 os.environ["TPMS_BRACKET"] = "subintervals"    
