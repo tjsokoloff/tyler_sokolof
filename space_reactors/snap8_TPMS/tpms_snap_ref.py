@@ -13,6 +13,13 @@ from openmc import volume
 from matplotlib import pyplot as plt
 from warnings import warn
 
+ Choose the algorithm: "brent", "bisection", "toms748", "newton"
+os.environ["TPMS_SOLVER"] = "brent"
+# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
+os.environ["TPMS_BRACKET"] = "subintervals"    
+# Choose the number of subintervals you want in case you chose the "subintervals" method
+os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
+
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
 height = 0.3594877527127572       # SNAP height of the full core (m)
