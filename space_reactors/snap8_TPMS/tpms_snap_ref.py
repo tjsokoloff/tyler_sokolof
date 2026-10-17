@@ -633,7 +633,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
         f_0_cells.append(f_0.get_all_materials().keys())
         f_1_cells.append(f_1.get_all_materials().keys())
-       ''' f_2_cells.append(f_2.get_all_materials().keys())
+    	'''f_2_cells.append(f_2.get_all_materials().keys())
         f_3_cells.append(f_3.get_all_materials().keys())
         f_4_cells.append(f_4.get_all_materials().keys())
         f_5_cells.append(f_5.get_all_materials().keys())
