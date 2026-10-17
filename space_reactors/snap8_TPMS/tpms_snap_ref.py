@@ -84,6 +84,8 @@ num_layers_for_plots = 30                # number of averaging layers for making
 #
 #    return t
 ### TPMS Geometry
+pitch = 1               # [cm]
+region1 = Box(pitch, "periodic")
 ###################### FILL this variables with the volumetric fractions you need ###########################################
 clad_dens  = 0.1182
 cool_dens  = 0.6326
