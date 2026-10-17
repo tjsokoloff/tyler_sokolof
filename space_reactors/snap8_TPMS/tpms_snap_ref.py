@@ -853,9 +853,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 150000
-    settings.inactive = 500
-    settings.batches = 1000
+    settings.particles = 1000
+    settings.inactive = 20
+    settings.batches = 100
     settings.temperature['method'] = 'interpolation'
     settings.temperature['range'] = (294.0, 1500.0)
     lower_left = [-radius4, -radius4, bottom_grid]
