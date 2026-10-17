@@ -538,28 +538,28 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     f_0_cells= []
     f_1_cells= []
-    '''f_2_cells= []
-    f_3_cells= []
-    f_4_cells= []
-    f_5_cells= []
-    f_6_cells= []
-    f_7_cells= []
-    f_8_cells= []
-    f_9_cells= []
-    f_10_cells= []
-    f_11_cells= []
-    f_12_cells= []
-    f_13_cells= []
-    f_14_cells= []
-    f_15_cells= []
-    f_16_cells= []
-    f_17_cells= []
-    f_18_cells= []
-    f_19_cells= []
-    f_20_cells= []
-    f_21_cells= []
-    f_22_cells= []
-    f_23_cells= []'''
+    #f_2_cells= []
+    #f_3_cells= []
+    #f_4_cells= []
+    #f_5_cells= []
+    #f_6_cells= []
+    #f_7_cells= []
+    #f_8_cells= []
+    #f_9_cells= []
+    #f_10_cells= []
+    #f_11_cells= []
+    #f_12_cells= []
+    #f_13_cells= []
+    #f_14_cells= []
+    #f_15_cells= []
+    #f_16_cells= []
+    #f_17_cells= []
+    #f_18_cells= []
+    #f_19_cells= []
+    #f_20_cells= []
+    #f_21_cells= []
+    #f_22_cells= []
+    #f_23_cells= []
     
     m_colors = {}
  
@@ -608,53 +608,53 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
         f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
-        '''f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_23 = pin_u.clone(clone_materials=True, clone_regions=False)'''
+        #f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_23 = pin_u.clone(clone_materials=True, clone_regions=False)'''
 
         f_0_cells.append(f_0.get_all_materials().keys())
         f_1_cells.append(f_1.get_all_materials().keys())
-    	'''f_2_cells.append(f_2.get_all_materials().keys())
-        f_3_cells.append(f_3.get_all_materials().keys())
-        f_4_cells.append(f_4.get_all_materials().keys())
-        f_5_cells.append(f_5.get_all_materials().keys())
-        f_6_cells.append(f_6.get_all_materials().keys())
-        f_7_cells.append(f_7.get_all_materials().keys())
-        f_8_cells.append(f_8.get_all_materials().keys())
-        f_9_cells.append(f_9.get_all_materials().keys())
-        f_10_cells.append(f_10.get_all_materials().keys())
-        f_11_cells.append(f_11.get_all_materials().keys())
-        f_12_cells.append(f_12.get_all_materials().keys())
-        f_13_cells.append(f_13.get_all_materials().keys())
-        f_14_cells.append(f_14.get_all_materials().keys())
-        f_15_cells.append(f_15.get_all_materials().keys())
-        f_16_cells.append(f_16.get_all_materials().keys())
-        f_17_cells.append(f_17.get_all_materials().keys())
-        f_18_cells.append(f_18.get_all_materials().keys())
-        f_19_cells.append(f_19.get_all_materials().keys())
-        f_20_cells.append(f_20.get_all_materials().keys())
-        f_21_cells.append(f_21.get_all_materials().keys())
-        f_22_cells.append(f_22.get_all_materials().keys())
-        f_23_cells.append(f_23.get_all_materials().keys())'''
+    	#f_2_cells.append(f_2.get_all_materials().keys())
+        #f_3_cells.append(f_3.get_all_materials().keys())
+        #f_4_cells.append(f_4.get_all_materials().keys())
+        #f_5_cells.append(f_5.get_all_materials().keys())
+        #f_6_cells.append(f_6.get_all_materials().keys())
+        #f_7_cells.append(f_7.get_all_materials().keys())
+        #f_8_cells.append(f_8.get_all_materials().keys())
+        #f_9_cells.append(f_9.get_all_materials().keys())
+        #f_10_cells.append(f_10.get_all_materials().keys())
+        #f_11_cells.append(f_11.get_all_materials().keys())
+        #f_12_cells.append(f_12.get_all_materials().keys())
+        #f_13_cells.append(f_13.get_all_materials().keys())
+        #f_14_cells.append(f_14.get_all_materials().keys())
+        #f_15_cells.append(f_15.get_all_materials().keys())
+        #f_16_cells.append(f_16.get_all_materials().keys())
+        #f_17_cells.append(f_17.get_all_materials().keys())
+        #f_18_cells.append(f_18.get_all_materials().keys())
+        #f_19_cells.append(f_19.get_all_materials().keys())
+        #f_20_cells.append(f_20.get_all_materials().keys())
+        #f_21_cells.append(f_21.get_all_materials().keys())
+        #f_22_cells.append(f_22.get_all_materials().keys())
+        #f_23_cells.append(f_23.get_all_materials().keys())
         
         # Create rings of fuel universes that will fill the lattice
         ring9 = [Ref_u]*54
