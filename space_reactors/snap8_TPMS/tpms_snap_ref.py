@@ -667,9 +667,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         #ring2 = [f_2, f_3]*6
         #ring1 = [f_1]*6
         ring0 = [f_0]*1
-        #lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
-	lattice_univs.append([ring0])
-
+        lattice_univs.append([ring0])
 		
         # Create rings of endcap universes that will fill the lattice
         endcap_ring10 = [Ref_u]*60
