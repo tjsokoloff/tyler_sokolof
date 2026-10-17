@@ -34,7 +34,7 @@ outlet_P = 254000                    # fluid outlet pressure (Pa)
 
 # other full core specifications used to construct the unit cell model
 
-n_fuel_pins = 1          # number of fuel rods per assembly
+n_fuel_pins = 211          # number of fuel rods per assembly
 																
 num_layers_for_plots = 30                # number of averaging layers for making plots
 
