@@ -754,6 +754,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     hex0= 13.03
     hex1= 13.03
     radius0 = 11.738356
+	fuel.volume = math.pi * radius0**2 * reactor_height
     radius1 = radius0 + 0.159004
     radius3 = 20.18
     radius4 = 27.426
@@ -767,10 +768,10 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=lat, region=-bundle_surface & -barrel_inner & +core_bottom & -core_top)
+    Bundle = openmc.Cell(fill=fuel, region=-barrel_inner & +core_bottom & -core_top)
     Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
     Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
-    Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
+    #Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
     Internal_lower = openmc.Cell(region=+bundle_surface & -barrel_outer & +bottom & -core_bottom)
     Internal_upper = openmc.Cell(region=+bundle_surface & -barrel_outer & +core_top & -top)
     Barrel = openmc.Cell(fill=barrel, region=+barrel_inner & -barrel_outer & +bottom & -top)
@@ -784,7 +785,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     Outer_gap_top2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +core_top & -top)
     
     geometry = openmc.Geometry([Lowergrid, Lowerendcap, Upperendcap, Uppergrid, Bundle, 
-                                Barrel, Internal_ref, Internal_lower, Internal_upper,  
+                                Barrel, Internal_lower, Internal_upper,  
                                 Outer_Ref_bottom, Outer_Ref_middle, Outer_Ref_top,
                                 Outer_gap_bottom1, Outer_gap_bottom2, Outer_gap_top1, Outer_gap_top2])
 
