@@ -9,6 +9,9 @@ import openmc
 import openmc.lib
 import sys
 import os
+from openmc import volume
+from matplotlib import pyplot as plt
+from warnings import warn
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
