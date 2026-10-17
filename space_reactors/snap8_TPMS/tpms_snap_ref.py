@@ -538,7 +538,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     f_0_cells= []
     f_1_cells= []
-    f_2_cells= []
+    '''f_2_cells= []
     f_3_cells= []
     f_4_cells= []
     f_5_cells= []
@@ -559,7 +559,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     f_20_cells= []
     f_21_cells= []
     f_22_cells= []
-    f_23_cells= []
+    f_23_cells= []'''
     
     m_colors = {}
  
@@ -607,8 +607,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         upper_grid_u = openmc.Universe(cells=(lowergrid_hole_cell, upper_grid_cell))
 
         f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
-        '''f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
+        '''f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
         f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
@@ -629,11 +629,11 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
         f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
         f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_23 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_23 = pin_u.clone(clone_materials=True, clone_regions=False)'''
 
         f_0_cells.append(f_0.get_all_materials().keys())
         f_1_cells.append(f_1.get_all_materials().keys())
-        f_2_cells.append(f_2.get_all_materials().keys())
+       ''' f_2_cells.append(f_2.get_all_materials().keys())
         f_3_cells.append(f_3.get_all_materials().keys())
         f_4_cells.append(f_4.get_all_materials().keys())
         f_5_cells.append(f_5.get_all_materials().keys())
