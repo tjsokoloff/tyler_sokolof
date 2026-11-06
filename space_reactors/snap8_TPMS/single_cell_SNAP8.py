@@ -586,13 +586,13 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid",
 			[iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
 
-	# Define cells
-	cell_fuel  = openmc.Cell(0, "cFuel", mFuel, region1 & +tpms_fuel1 & -tpms_fuel2)
-	cell_clad1 = openmc.Cell(1, "cClad", mClad, region1 & +tpms_clad1 & -tpms_gap1)
-	cell_clad2 = openmc.Cell(2, "cClad", mClad, region1 & +tpms_gap2  & -tpms_clad2)
-	cell_gap1  = openmc.Cell(3, "cGap",  None,  region1 & +tpms_gap1  & -tpms_fuel1)
-	cell_gap2  = openmc.Cell(4, "cGap",  None,  region1 & +tpms_fuel2 & -tpms_gap2)
-	cell_cool  = openmc.Cell(5, "cCool", mCool, region1 & (-tpms_clad1 | +tpms_clad2))
+# Define cells
+cell_fuel  = openmc.Cell(0, "cFuel", mFuel, region1 & +tpms_fuel1 & -tpms_fuel2)
+cell_clad1 = openmc.Cell(1, "cClad", mClad, region1 & +tpms_clad1 & -tpms_gap1)
+cell_clad2 = openmc.Cell(2, "cClad", mClad, region1 & +tpms_gap2  & -tpms_clad2)
+cell_gap1  = openmc.Cell(3, "cGap",  None,  region1 & +tpms_gap1  & -tpms_fuel1)
+cell_gap2  = openmc.Cell(4, "cGap",  None,  region1 & +tpms_fuel2 & -tpms_gap2)
+cell_cool  = openmc.Cell(5, "cCool", mCool, region1 & (-tpms_clad1 | +tpms_clad2))
 
 
 for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
