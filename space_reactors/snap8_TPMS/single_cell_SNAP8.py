@@ -773,7 +773,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
     
 pitch = 1               # [cm]
-    region1 = barrel_inner(pitch, "periodic")
+    region1 = box(pitch, "periodic")
 
 ###################### FILL this variables with the volumetric fractions you need ###########################################
     clad_dens  = 0.1182
