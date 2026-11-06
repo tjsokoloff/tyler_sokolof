@@ -13,6 +13,13 @@ from openmc import volume
 from matplotlib import pyplot as plt
 from warnings import warn
 
+# Choose the algorithm: "brent", "bisection", "toms748", "newton"
+os.environ["TPMS_SOLVER"] = "brent"
+# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
+os.environ["TPMS_BRACKET"] = "subintervals"    
+# Choose the number of subintervals you want in case you chose the "subintervals" method
+os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
+
 
 fuel_r = 11
 
@@ -508,19 +515,46 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 	
-    r_pin = openmc.ZCylinder(surface_id=1, r=fuel_r) 
-    ceramic_or = openmc.ZCylinder(surface_id=2, r= (fuel_r + .005)) 
-    clad_ir = openmc.ZCylinder(surface_id=3, r= (fuel_r + .01))
-    clad_or = openmc.ZCylinder(surface_id=4, r= (fuel_r + .015))  
+      tpms_period = 2.0          # cm, feature size of one gyroid period
+clad_frac   = 0.1182       # volume fractions (must sum to < 1; remainder = gap)
+cool_frac   = 0.6326
+fuel_frac   = 0.2342
+
+iso_clad1 = cool_frac / 2
+iso_gap1  = iso_clad1 + clad_frac / 2
+iso_fuel1 = 0.5 - fuel_frac / 2
+iso_fuel2 = 0.5 + fuel_frac / 2
+iso_gap2  = 1 - iso_gap1
+iso_clad2 = 1 - iso_clad1
+
+(t_clad1, t_gap1, t_fuel1, t_fuel2, t_gap2, t_clad2) = openmc.TPMS.from_relative_densities(
+    "Gyroid",
+    [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2],
+    tpms_period)
+
+fuel_cell  = openmc.Cell(fill=fuel,    region=+t_fuel1 & -t_fuel2)
+clad_cell1 = openmc.Cell(fill=clad,    region=+t_clad1 & -t_gap1)
+clad_cell2 = openmc.Cell(fill=clad,    region=+t_gap2  & -t_clad2)
+gap_cell1  = openmc.Cell(fill=gap,     region=+t_gap1  & -t_fuel1)
+gap_cell2  = openmc.Cell(fill=gap,     region=+t_fuel2 & -t_gap2)
+NaK_cell   = openmc.Cell(fill=coolant, region=(-t_clad1 | +t_clad2))
+
+fuel_cell.temperature = 934.6035
+clad_cell1.temperature = clad_cell2.temperature = 934.6035
+gap_cell1.temperature = gap_cell2.temperature = 934.6035
+NaK_cell.temperature = T
+
+pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
+                               gap_cell1, gap_cell2, NaK_cell))
     
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
     z2 = openmc.ZPlane(surface_id=6, z0=32.6917) 
 
-    r_hole = openmc.ZCylinder(surface_id=7, r=0.0794) # gridplate holes
-    z3 = openmc.ZPlane(surface_id=8, z0=bottom_grid, boundary_type='vacuum') # lower grid
-    z4 = openmc.ZPlane(surface_id=9, z0=bottom_endcap) # lower endcap
-    z5 = openmc.ZPlane(surface_id=10, z0=top_endcap) # upper endcap
-    z6 = openmc.ZPlane(surface_id=11, z0=top_grid, boundary_type='vacuum') # upper grid
+    #r_hole = openmc.ZCylinder(surface_id=7, r=0.0794) # gridplate holes
+    #z3 = openmc.ZPlane(surface_id=8, z0=bottom_grid, boundary_type='vacuum') # lower grid
+    #z4 = openmc.ZPlane(surface_id=9, z0=bottom_endcap) # lower endcap
+    #z5 = openmc.ZPlane(surface_id=10, z0=top_endcap) # upper endcap
+    #z6 = openmc.ZPlane(surface_id=11, z0=top_grid, boundary_type='vacuum') # upper grid
 
     core_top = openmc.ZPlane(surface_id=12, z0=reactor_top)
     core_bottom = openmc.ZPlane(surface_id=13, z0=reactor_bottom) 
@@ -574,15 +608,15 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         ax_pos = 0.5 * (z_min + z_max)
         T = coolant_temp(inlet_T, coolant_outlet_temp, reactor_height, ax_pos)
         
-        fuel_cell = openmc.Cell(fill=fuel, region=-r_pin)
-        ceramic_cell = openmc.Cell(fill=ceramic, region=+r_pin & -ceramic_or)
-        gap_cell = openmc.Cell(fill=gap, region=+ceramic_or & -clad_ir)
-        clad_cell = openmc.Cell(fill=clad, region=+clad_ir & -clad_or)
-        NaK_cell = openmc.Cell(fill=coolant, region=+clad_or)
+        #fuel_cell = openmc.Cell(fill=fuel, region=-r_pin)
+        #ceramic_cell = openmc.Cell(fill=ceramic, region=+r_pin & -ceramic_or)
+        #gap_cell = openmc.Cell(fill=gap, region=+ceramic_or & -clad_ir)
+        #clad_cell = openmc.Cell(fill=clad, region=+clad_ir & -clad_or)
+        #NaK_cell = openmc.Cell(fill=coolant, region=+clad_or)
         all_NaK_cell = openmc.Cell(fill=coolant)
         Ref_cell = openmc.Cell(fill=refl_mix)
 
-        endcap_cell = openmc.Cell(fill=endcaps, region=-clad_or)
+        #endcap_cell = openmc.Cell(fill=endcaps, region=-clad_or)
         
         uppergrid_hole_cell = openmc.Cell(fill=coolant, region=-r_hole)
         upper_grid_cell = openmc.Cell(fill=upper_grid, region=+r_hole)
@@ -608,7 +642,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         lowergrid_S = openmc.Universe(cells=(lower_grid_S_cell,))
         uppergrid_S = openmc.Universe(cells=(upper_grid_S_cell,))
 
-        endcap_u = openmc.Universe(cells=(endcap_cell, NaK_cell))
+        ##endcap_u = openmc.Universe(cells=(endcap_cell, NaK_cell))
         lower_grid_u = openmc.Universe(cells=(uppergrid_hole_cell, lower_grid_cell))
         upper_grid_u = openmc.Universe(cells=(lowergrid_hole_cell, upper_grid_cell))
 
