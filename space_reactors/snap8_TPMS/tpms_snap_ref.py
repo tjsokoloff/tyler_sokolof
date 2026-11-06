@@ -515,7 +515,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 	
-    tpms_period = 2.0          # cm, feature size of one gyroid period
+    pitch = 5.0          # cm
     clad_frac   = 0.1182       # volume fractions (must sum to < 1; remainder = gap)
     cool_frac   = 0.6326
     fuel_frac   = 0.2342
@@ -530,7 +530,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     (t_clad1, t_gap1, t_fuel1, t_fuel2, t_gap2, t_clad2) = openmc.TPMS.from_relative_densities(
         "Gyroid",
         [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2],
-        tpms_period)
+        pitch)
 
     fuel_cell  = openmc.Cell(fill=fuel,    region=+t_fuel1 & -t_fuel2)
     clad_cell1 = openmc.Cell(fill=clad,    region=+t_clad1 & -t_gap1)
@@ -545,7 +545,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
                                gap_cell1, gap_cell2, NaK_cell))
-    
+    geometry = openmc.Geometry([root])
+    geometry.export_to_xml()
+	
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
     z2 = openmc.ZPlane(surface_id=6, z0=32.6917) 
 
@@ -937,7 +939,7 @@ Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_botto
     plot_xy.filename = 'plot_fuel_tpms'
     plot_xy.basis    = 'xy'
     plot_xy.origin   = (0.0, 0.0, z_mid)
-    plot_xy.width    = (2 * tpms_period, 2 * tpms_period)   # two periods so you can see it repeat
+    plot_xy.width    = (2 * pitch, 2 * pitch)   # two periods so you can see it repeat
     plot_xy.pixels   = (800, 800)
     plot_xy.color_by = 'material'
     plot_xy.colors   = tpms_colors
