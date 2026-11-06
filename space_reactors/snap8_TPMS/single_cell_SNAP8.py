@@ -616,7 +616,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         iso_gap2   = 1 - iso_gap1
         iso_clad2  = 1 - iso_clad1
 
-	    (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid",[iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
+	    (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid", [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
 		
         pin_u = openmc.Universe(cells=(fuel_cell, ceramic_cell, gap_cell, clad_cell, NaK_cell))
         NaK_u = openmc.Universe(cells=(all_NaK_cell,))
