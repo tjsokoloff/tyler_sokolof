@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 from warnings import warn
 
 
-fuel_r = 11
+pitch = 11
 
 fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -509,10 +509,10 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 	
-    r_pin = openmc.ZCylinder(surface_id=1, r=fuel_r) 
-    ceramic_or = openmc.ZCylinder(surface_id=2, r= (fuel_r + .005)) 
-    clad_ir = openmc.ZCylinder(surface_id=3, r= (fuel_r + .01))
-    clad_or = openmc.ZCylinder(surface_id=4, r= (fuel_r + .015))  
+    r_pin = openmc.ZCylinder(surface_id=1, r=pitch) 
+    ceramic_or = openmc.ZCylinder(surface_id=2, r= (pitch + .005)) 
+    clad_ir = openmc.ZCylinder(surface_id=3, r= (pitch + .01))
+    clad_or = openmc.ZCylinder(surface_id=4, r= (pitch + .015))  
     
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
     z2 = openmc.ZPlane(surface_id=6, z0=32.6917) 
@@ -532,8 +532,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height / 100  
     #ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height / 100
 
-    fuel_volume_per_pin = math.pi * fuel_r * fuel_r * axial_section_height
-    ceramic_volume_per_pin = math.pi * (((fuel_r + .005) * (fuel_r + .005)) - (fuel_r*fuel_r)) * axial_section_height
+    fuel_volume_per_pin = math.pi * pitch * pitch * axial_section_height
+    ceramic_volume_per_pin = math.pi * (((pitch + .005) * (pitch + .005)) - (pitch*pitch)) * axial_section_height
 
     axial_coords = np.linspace(reactor_bottom, reactor_top, n_ax_zones + 1)
     lattice_univs = []
