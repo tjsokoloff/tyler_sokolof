@@ -20,7 +20,21 @@ os.environ["TPMS_BRACKET"] = "subintervals"
 # Choose the number of subintervals you want in case you chose the "subintervals" method
 os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
 
-pitch = 5
+fuel_r = 5
+
+hex0= 13.03
+hex1= 13.03
+radius0 =11
+radius1 = radius0 + 0.159004
+radius3 = 20.18
+radius4 = 27.426
+
+barrel_inner = openmc.ZCylinder(r=radius0)
+barrel_outer = openmc.ZCylinder(r=radius1)
+bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
+other_surface = openmc.model.HexagonalPrism(hex1, 'x')
+outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
+outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
 
 fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -763,19 +777,6 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     lat_uppergrid.orientation = 'x'
     lat_uppergrid.universes = lattice_univs2
 
-    hex0= 13.03
-    hex1= 13.03
-    radius0 =11
-    radius1 = radius0 + 0.159004
-    radius3 = 20.18
-    radius4 = 27.426
-
-    barrel_inner = openmc.ZCylinder(r=radius0)
-    barrel_outer = openmc.ZCylinder(r=radius1)
-    bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
-    other_surface = openmc.model.HexagonalPrism(hex1, 'x')
-    outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
-    outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
