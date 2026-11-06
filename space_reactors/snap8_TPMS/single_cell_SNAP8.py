@@ -1004,7 +1004,7 @@ for mat in mats_from_geom:
     plot9.to_ipython_image()
 
    
-    return model
+   # return model
 
 def main():
 
