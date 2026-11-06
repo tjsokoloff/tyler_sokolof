@@ -22,7 +22,7 @@ os.environ["TPMS_BRACKET"] = "derivatives"
 # Choose the number of subintervals you want in case you chose the "subintervals" method
 os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
 
-fuel_diameter = 0.67564                # diameter of fuel compacts (m)
+fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
 height = 0.3594877527127572       # SNAP height of the full core (m)
 
@@ -515,7 +515,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 
-    r_pin = openmc.ZCylinder(surface_id=1, r=0.67564) 
+    r_pin = openmc.ZCylinder(surface_id=1, r=1) 
     ceramic_or = openmc.ZCylinder(surface_id=2, r=0.681) 
     clad_ir = openmc.ZCylinder(surface_id=3, r=0.685) 
     clad_or = openmc.ZCylinder(surface_id=4, r=0.7134)  
