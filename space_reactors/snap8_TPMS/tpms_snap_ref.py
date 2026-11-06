@@ -759,7 +759,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     hex0= 13.03
     hex1= 13.03
-    radius0 =100
+    radius0 =11
     radius1 = radius0 + 0.159004
     radius3 = 20.18
     radius4 = 27.426
@@ -773,7 +773,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=lat, region=-bundle_surface & -barrel_inner & +core_bottom & -core_top)
+    Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
     Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
     Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
     Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
