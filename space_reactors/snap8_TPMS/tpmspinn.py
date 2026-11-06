@@ -196,4 +196,4 @@ settings.export_to_xml()
 
 openmc.run(threads=8)
 materials.append(mFuel)
-return mFuel, materials, mColors
+    return mFuel, materials, mColors
