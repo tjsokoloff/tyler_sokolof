@@ -1,5 +1,4 @@
-#SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.py
-from pprint import pprint
+#SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.pyfrom pprint import pprint
 from argparse import ArgumentParser
 import math
 import numpy as np
@@ -13,13 +12,6 @@ import os
 from openmc import volume
 from matplotlib import pyplot as plt
 from warnings import warn
-
-# Choose the algorithm: "brent", "bisection", "toms748", "newton"
-os.environ["TPMS_SOLVER"] = "brent"
-# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
-os.environ["TPMS_BRACKET"] = "derivatives"    
-# Choose the number of subintervals you want in case you chose the "subintervals" method
-os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -45,7 +37,7 @@ outlet_P = 254000                    # fluid outlet pressure (Pa)
 
 # other full core specifications used to construct the unit cell model
 
-n_fuel_pins = 1          # number of fuel rods per assembly
+n_fuel_pins = 211          # number of fuel rods per assembly
 																
 num_layers_for_plots = 30                # number of averaging layers for making plots
 
@@ -142,7 +134,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     axial_section_height = reactor_height / n_ax_zones
 
     model = openmc.model.Model()
-### MATERIALS
+
     # Coolant
     coolant = openmc.Material(name='coolant', temperature=922.03)
     coolant.set_density('g/cm3', 0.7122841607062166)
@@ -505,8 +497,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     endcaps.add_nuclide('Ti48', 0.001843, 'wo')
     endcaps.add_nuclide('Ti49', 0.00013525, 'wo')
     endcaps.add_nuclide('Ti50', 0.0001295, 'wo')
-### END MATERIALS
-	
+
     #reflMix = openmc.Material.mix_materials([barrel, clad, internal_reflector, air], [0.191, 0.042, 0.41, 0.357], 'vo')
 
     # Instantiate a Materials collection and export to xml
@@ -537,8 +528,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height / 100  
     #ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height / 100
 
-    fuel_volume_per_pin = math.pi * r_pin * r_pin * axial_section_height
-    ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (r_pin*r_pin)) * axial_section_height
+    fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height
+    ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height
 
     axial_coords = np.linspace(reactor_bottom, reactor_top, n_ax_zones + 1)
     lattice_univs = []
@@ -679,8 +670,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         ring2 = [f_2, f_3]*6
         ring1 = [f_1]*6
         ring0 = [f_0]*1
-        #lattice_univs.append([ring1, ring0])
-		lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
+        lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
+
         # Create rings of endcap universes that will fill the lattice
         endcap_ring10 = [Ref_u]*60
         endcap_ring9 = [Ref_u]*54
@@ -865,9 +856,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 1500
-    settings.inactive = 5
-    settings.batches = 50
+    settings.particles = 150000
+    settings.inactive = 500
+    settings.batches = 1000
     settings.temperature['method'] = 'interpolation'
     settings.temperature['range'] = (294.0, 1500.0)
     lower_left = [-radius4, -radius4, bottom_grid]
