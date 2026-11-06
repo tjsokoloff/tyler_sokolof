@@ -20,7 +20,7 @@ os.environ["TPMS_BRACKET"] = "subintervals"
 # Choose the number of subintervals you want in case you chose the "subintervals" method
 os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
 
-fuel_r = 5
+fuel_r = 11
 
 fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
