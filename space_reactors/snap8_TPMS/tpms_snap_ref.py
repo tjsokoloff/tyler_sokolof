@@ -16,7 +16,7 @@ from warnings import warn
 
 fuel_r = 10.0
 
-fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
+fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
 height = 0.3594877527127572       # SNAP height of the full core (m)
 
