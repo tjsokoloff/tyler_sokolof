@@ -747,7 +747,7 @@ for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
                                lowergrid_ring5, lowergrid_ring4, lowergrid_ring3, lowergrid_ring2, lowergrid_ring1, lowergrid_ring0])
 
 # Create the prism that will contain the lattice
-    # active region
+# active region
     lat = openmc.HexLattice()
     lat.center = (0.0, 0.0, 0.5 * (reactor_bottom + reactor_top))
     lat.pitch = (cell_pitch, axial_section_height)
