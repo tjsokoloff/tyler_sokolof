@@ -1,24 +1,18 @@
-from pprint import pprint
-from argparse import ArgumentParser
-
-import math
-import numpy as np
-import matplotlib.pyplot as plt
-
-import openmc
-import openmc.lib
-import sys
-import os
-from openmc import volume
-from matplotlib import pyplot as plt
-from warnings import warn
-
-# Choose the algorithm: "brent", "bisection", "toms748", "newton"
-os.environ["TPMS_SOLVER"] = "brent"
-# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
-os.environ["TPMS_BRACKET"] = "subintervals"    
-# Choose the number of subintervals you want in case you chose the "subintervals" method
-os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
+#SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.py
+from pprint 
+import pprint 
+from argparse 
+import ArgumentParser 
+import math 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import openmc 
+import openmc.lib 
+import sys 
+import os from openmc 
+import volume from matplotlib 
+import pyplot as plt from warnings 
+import warn
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -83,47 +77,6 @@ num_layers_for_plots = 30                # number of averaging layers for making
 #    t = t_in + Qi / Q * dT
 #
 #    return t
-### TPMS Geometry
-pitch = 1               # [cm]
-#region1 = Box(pitch, "periodic")
-###################### FILL this variables with the volumetric fractions you need ###########################################
-clad_dens  = 0.1182
-cool_dens  = 0.6326
-fuel_dens  = 0.2342
-void_dens  = 1 - (clad_dens + cool_dens + fuel_dens)  # gap tra fuel e clad
-
-######################## coolant | clad | gap | fuel | gap | clad | coolant ################################################
-iso_clad1  = cool_dens / 2
-iso_gap1   = iso_clad1 + clad_dens/2
-iso_fuel1  = 0.5 - fuel_dens/2
-iso_fuel2  = 0.5 + fuel_dens/2
-iso_gap2   = 1 - iso_gap1
-iso_clad2  = 1 - iso_clad1
-
-(tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Diamond",
-    [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
-
-# Define cellss
-cell_fuel  = openmc.Cell(0, "cFuel", mFuel, region1 & +tpms_fuel1 & -tpms_fuel2)
-cell_clad1 = openmc.Cell(1, "cClad", mClad, region1 & +tpms_clad1 & -tpms_gap1)
-cell_clad2 = openmc.Cell(2, "cClad", mClad, region1 & +tpms_gap2  & -tpms_clad2)
-cell_gap1  = openmc.Cell(3, "cGap",  None,  region1 & +tpms_gap1  & -tpms_fuel1)
-cell_gap2  = openmc.Cell(4, "cGap",  None,  region1 & +tpms_fuel2 & -tpms_gap2)
-cell_cool  = openmc.Cell(5, "cCool", mCool, region1 & (-tpms_clad1 | +tpms_clad2))
-
-universe = openmc.Universe(0, "universe",[cell_fuel, cell_clad1, cell_clad2, cell_gap1, cell_gap2, cell_cool])
-root = openmc.Cell(6, "root", universe, region1)
-geometry = openmc.Geometry([root])
-geometry.export_to_xml()
-
-plot_xy = openmc.Plot()
-plot_xy.basis = 'xy'
-plot_xy.origin = (0, 0, 0)
-plot_xy.width = (pitch, pitch)
-plot_xy.pixels = (300, 300)
-plot_xy.color_by = 'material'
-plot_xy.colors = {mFuel: 'red', mClad: 'grey', mCool: 'blue'}
-openmc.plot_inline(plot_xy)
 
 def coolant_temp(t_in, t_out, l, z):
     """
@@ -588,29 +541,29 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     whole_fuel_cells = []
 
     f_0_cells= []
-    #f_1_cells= []
-    #f_2_cells= []
-    #f_3_cells= []
-    #f_4_cells= []
-    #f_5_cells= []
-    #f_6_cells= []
-    #f_7_cells= []
-    #f_8_cells= []
-    #f_9_cells= []
-    #f_10_cells= []
-    #f_11_cells= []
-    #f_12_cells= []
-    #f_13_cells= []
-    #f_14_cells= []
-    #f_15_cells= []
-    #f_16_cells= []
-    #f_17_cells= []
-    #f_18_cells= []
-    #f_19_cells= []
-    #f_20_cells= []
-    #f_21_cells= []
-    #f_22_cells= []
-    #f_23_cells= []
+    f_1_cells= []
+    f_2_cells= []
+    f_3_cells= []
+    f_4_cells= []
+    f_5_cells= []
+    f_6_cells= []
+    f_7_cells= []
+    f_8_cells= []
+    f_9_cells= []
+    f_10_cells= []
+    f_11_cells= []
+    f_12_cells= []
+    f_13_cells= []
+    f_14_cells= []
+    f_15_cells= []
+    f_16_cells= []
+    f_17_cells= []
+    f_18_cells= []
+    f_19_cells= []
+    f_20_cells= []
+    f_21_cells= []
+    f_22_cells= []
+    f_23_cells= []
     
     m_colors = {}
  
@@ -658,68 +611,68 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         upper_grid_u = openmc.Universe(cells=(lowergrid_hole_cell, upper_grid_cell))
 
         f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
-        #f_23 = pin_u.clone(clone_materials=True, clone_regions=False)'''
+        f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
+        f_23 = pin_u.clone(clone_materials=True, clone_regions=False)
 
         f_0_cells.append(f_0.get_all_materials().keys())
-        #f_1_cells.append(f_1.get_all_materials().keys())
-    	#f_2_cells.append(f_2.get_all_materials().keys())
-        #f_3_cells.append(f_3.get_all_materials().keys())
-        #f_4_cells.append(f_4.get_all_materials().keys())
-        #f_5_cells.append(f_5.get_all_materials().keys())
-        #f_6_cells.append(f_6.get_all_materials().keys())
-        #f_7_cells.append(f_7.get_all_materials().keys())
-        #f_8_cells.append(f_8.get_all_materials().keys())
-        #f_9_cells.append(f_9.get_all_materials().keys())
-        #f_10_cells.append(f_10.get_all_materials().keys())
-        #f_11_cells.append(f_11.get_all_materials().keys())
-        #f_12_cells.append(f_12.get_all_materials().keys())
-        #f_13_cells.append(f_13.get_all_materials().keys())
-        #f_14_cells.append(f_14.get_all_materials().keys())
-        #f_15_cells.append(f_15.get_all_materials().keys())
-        #f_16_cells.append(f_16.get_all_materials().keys())
-        #f_17_cells.append(f_17.get_all_materials().keys())
-        #f_18_cells.append(f_18.get_all_materials().keys())
-        #f_19_cells.append(f_19.get_all_materials().keys())
-        #f_20_cells.append(f_20.get_all_materials().keys())
-        #f_21_cells.append(f_21.get_all_materials().keys())
-        #f_22_cells.append(f_22.get_all_materials().keys())
-        #f_23_cells.append(f_23.get_all_materials().keys())
+        f_1_cells.append(f_1.get_all_materials().keys())
+        f_2_cells.append(f_2.get_all_materials().keys())
+        f_3_cells.append(f_3.get_all_materials().keys())
+        f_4_cells.append(f_4.get_all_materials().keys())
+        f_5_cells.append(f_5.get_all_materials().keys())
+        f_6_cells.append(f_6.get_all_materials().keys())
+        f_7_cells.append(f_7.get_all_materials().keys())
+        f_8_cells.append(f_8.get_all_materials().keys())
+        f_9_cells.append(f_9.get_all_materials().keys())
+        f_10_cells.append(f_10.get_all_materials().keys())
+        f_11_cells.append(f_11.get_all_materials().keys())
+        f_12_cells.append(f_12.get_all_materials().keys())
+        f_13_cells.append(f_13.get_all_materials().keys())
+        f_14_cells.append(f_14.get_all_materials().keys())
+        f_15_cells.append(f_15.get_all_materials().keys())
+        f_16_cells.append(f_16.get_all_materials().keys())
+        f_17_cells.append(f_17.get_all_materials().keys())
+        f_18_cells.append(f_18.get_all_materials().keys())
+        f_19_cells.append(f_19.get_all_materials().keys())
+        f_20_cells.append(f_20.get_all_materials().keys())
+        f_21_cells.append(f_21.get_all_materials().keys())
+        f_22_cells.append(f_22.get_all_materials().keys())
+        f_23_cells.append(f_23.get_all_materials().keys())
         
         # Create rings of fuel universes that will fill the lattice
-        #ring9 = [Ref_u]*54
-        #ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
-        #ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
-        #ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
-        #ring5 = [f_9, f_10, f_11, f_11, f_10]*6
-        #ring4 = [f_6, f_7, f_8, f_7]*6
-        #ring3 = [f_4, f_5, f_5]*6
-        #ring2 = [f_2, f_3]*6
-        #ring1 = [f_1]*6
+        ring9 = [Ref_u]*54
+        ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
+        ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
+        ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
+        ring5 = [f_9, f_10, f_11, f_11, f_10]*6
+        ring4 = [f_6, f_7, f_8, f_7]*6
+        ring3 = [f_4, f_5, f_5]*6
+        ring2 = [f_2, f_3]*6
+        ring1 = [f_1]*6
         ring0 = [f_0]*1
-        lattice_univs.append([ring0])
-		
+        lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
+
         # Create rings of endcap universes that will fill the lattice
         endcap_ring10 = [Ref_u]*60
         endcap_ring9 = [Ref_u]*54
@@ -805,7 +758,6 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     hex0= 13.03
     hex1= 13.03
     radius0 = 11.738356
-	#fuel.volume = math.pi * radius0**2 * reactor_height
     radius1 = radius0 + 0.159004
     radius3 = 20.18
     radius4 = 27.426
@@ -819,10 +771,10 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=fuel, region=-barrel_inner & +core_bottom & -core_top)
+    Bundle = openmc.Cell(fill=lat, region=-bundle_surface & -barrel_inner & +core_bottom & -core_top)
     Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
     Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
-    #Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
+    Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
     Internal_lower = openmc.Cell(region=+bundle_surface & -barrel_outer & +bottom & -core_bottom)
     Internal_upper = openmc.Cell(region=+bundle_surface & -barrel_outer & +core_top & -top)
     Barrel = openmc.Cell(fill=barrel, region=+barrel_inner & -barrel_outer & +bottom & -top)
@@ -836,7 +788,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     Outer_gap_top2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +core_top & -top)
     
     geometry = openmc.Geometry([Lowergrid, Lowerendcap, Upperendcap, Uppergrid, Bundle, 
-                                Barrel, Internal_lower, Internal_upper,  
+                                Barrel, Internal_ref, Internal_lower, Internal_upper,  
                                 Outer_Ref_bottom, Outer_Ref_middle, Outer_Ref_top,
                                 Outer_gap_bottom1, Outer_gap_bottom2, Outer_gap_top1, Outer_gap_top2])
 
@@ -853,29 +805,29 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     geom_IDs = list(geometry.get_all_materials().keys())
     
     f_0_IDs = sum([list(mat_dict) for mat_dict in f_0_cells], [])
-    #f_1_IDs = sum([list(mat_dict) for mat_dict in f_1_cells], [])
-    #f_2_IDs = sum([list(mat_dict) for mat_dict in f_2_cells], [])
-    #f_3_IDs = sum([list(mat_dict) for mat_dict in f_3_cells], [])
-    #f_4_IDs = sum([list(mat_dict) for mat_dict in f_4_cells], [])
-    #f_5_IDs = sum([list(mat_dict) for mat_dict in f_5_cells], [])
-    #f_6_IDs = sum([list(mat_dict) for mat_dict in f_6_cells], [])
-    #f_7_IDs = sum([list(mat_dict) for mat_dict in f_7_cells], [])
-    #f_8_IDs = sum([list(mat_dict) for mat_dict in f_8_cells], [])
-    #f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
-    #f_10_IDs = sum([list(mat_dict) for mat_dict in f_10_cells], [])
-    #f_11_IDs = sum([list(mat_dict) for mat_dict in f_11_cells], [])
-    #f_12_IDs = sum([list(mat_dict) for mat_dict in f_12_cells], [])
-    #f_13_IDs = sum([list(mat_dict) for mat_dict in f_13_cells], [])
-    #f_14_IDs = sum([list(mat_dict) for mat_dict in f_14_cells], [])
-    #f_15_IDs = sum([list(mat_dict) for mat_dict in f_15_cells], [])
-    #f_16_IDs = sum([list(mat_dict) for mat_dict in f_16_cells], [])
-    #f_17_IDs = sum([list(mat_dict) for mat_dict in f_17_cells], [])
-    #f_18_IDs = sum([list(mat_dict) for mat_dict in f_18_cells], [])
-    #f_19_IDs = sum([list(mat_dict) for mat_dict in f_19_cells], [])
-    #f_20_IDs = sum([list(mat_dict) for mat_dict in f_20_cells], [])
-    #f_21_IDs = sum([list(mat_dict) for mat_dict in f_21_cells], [])
-    #f_22_IDs = sum([list(mat_dict) for mat_dict in f_22_cells], [])
-    #f_23_IDs = sum([list(mat_dict) for mat_dict in f_23_cells], [])
+    f_1_IDs = sum([list(mat_dict) for mat_dict in f_1_cells], [])
+    f_2_IDs = sum([list(mat_dict) for mat_dict in f_2_cells], [])
+    f_3_IDs = sum([list(mat_dict) for mat_dict in f_3_cells], [])
+    f_4_IDs = sum([list(mat_dict) for mat_dict in f_4_cells], [])
+    f_5_IDs = sum([list(mat_dict) for mat_dict in f_5_cells], [])
+    f_6_IDs = sum([list(mat_dict) for mat_dict in f_6_cells], [])
+    f_7_IDs = sum([list(mat_dict) for mat_dict in f_7_cells], [])
+    f_8_IDs = sum([list(mat_dict) for mat_dict in f_8_cells], [])
+    f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
+    f_10_IDs = sum([list(mat_dict) for mat_dict in f_10_cells], [])
+    f_11_IDs = sum([list(mat_dict) for mat_dict in f_11_cells], [])
+    f_12_IDs = sum([list(mat_dict) for mat_dict in f_12_cells], [])
+    f_13_IDs = sum([list(mat_dict) for mat_dict in f_13_cells], [])
+    f_14_IDs = sum([list(mat_dict) for mat_dict in f_14_cells], [])
+    f_15_IDs = sum([list(mat_dict) for mat_dict in f_15_cells], [])
+    f_16_IDs = sum([list(mat_dict) for mat_dict in f_16_cells], [])
+    f_17_IDs = sum([list(mat_dict) for mat_dict in f_17_cells], [])
+    f_18_IDs = sum([list(mat_dict) for mat_dict in f_18_cells], [])
+    f_19_IDs = sum([list(mat_dict) for mat_dict in f_19_cells], [])
+    f_20_IDs = sum([list(mat_dict) for mat_dict in f_20_cells], [])
+    f_21_IDs = sum([list(mat_dict) for mat_dict in f_21_cells], [])
+    f_22_IDs = sum([list(mat_dict) for mat_dict in f_22_cells], [])
+    f_23_IDs = sum([list(mat_dict) for mat_dict in f_23_cells], [])
 
 
     # create materials object with correct volume information
@@ -885,9 +837,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     # iterate through all materials
     # if depletable, look in each of the lists and assign volume depending on which list
     fuel_id_groups = {
-    1: f_0_IDs}
-    #6: f_1_IDs + f_2_IDs + f_3_IDs + f_4_IDs + f_6_IDs + f_8_IDs + f_9_IDs + f_12_IDs + f_15_IDs + f_16_IDs + f_23_IDs,
-    #12: f_5_IDs + f_7_IDs + f_10_IDs + f_11_IDs + f_13_IDs + f_14_IDs + f_17_IDs + f_18_IDs + f_19_IDs + f_20_IDs + f_21_IDs + f_22_IDs}
+    1: f_0_IDs,
+    6: f_1_IDs + f_2_IDs + f_3_IDs + f_4_IDs + f_6_IDs + f_8_IDs + f_9_IDs + f_12_IDs + f_15_IDs + f_16_IDs + f_23_IDs,
+    12: f_5_IDs + f_7_IDs + f_10_IDs + f_11_IDs + f_13_IDs + f_14_IDs + f_17_IDs + f_18_IDs + f_19_IDs + f_20_IDs + f_21_IDs + f_22_IDs}
 
     for mat in mats_from_geom:
         if mat.depletable:
@@ -905,9 +857,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 1000
-    settings.inactive = 20
-    settings.batches = 100
+    settings.particles = 150000
+    settings.inactive = 500
+    settings.batches = 1000
     settings.temperature['method'] = 'interpolation'
     settings.temperature['range'] = (294.0, 1500.0)
     lower_left = [-radius4, -radius4, bottom_grid]
