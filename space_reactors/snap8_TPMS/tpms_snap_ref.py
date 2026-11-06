@@ -670,7 +670,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         ring2 = [f_2, f_3]*6
         ring1 = [f_1]*6
         ring0 = [f_0]*1
-        lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
+        lattice_univs.append([ring0])
 
         # Create rings of endcap universes that will fill the lattice
         endcap_ring10 = [Ref_u]*60
@@ -856,9 +856,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 150000
-    settings.inactive = 500
-    settings.batches = 1000
+    settings.particles = 1500
+    settings.inactive = 5
+    settings.batches = 50
     settings.temperature['method'] = 'interpolation'
     settings.temperature['range'] = (294.0, 1500.0)
     lower_left = [-radius4, -radius4, bottom_grid]
