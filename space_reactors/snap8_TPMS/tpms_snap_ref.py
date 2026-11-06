@@ -766,19 +766,21 @@ pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
     lat_lowergrid.orientation = 'x'
     lat_lowergrid.universes = lattice_univs3
     # lower endcap
-    lat_lowerendcap = openmc.HexLattice()
-    lat_lowerendcap.center = (0.0, 0.0, 0.5 * (bottom_endcap + reactor_bottom))
-    lat_lowerendcap.pitch = (cell_pitch, (reactor_bottom - bottom_endcap))
-    lat_lowerendcap.outer = Ref_u
-    lat_lowerendcap.orientation = 'x'
-    lat_lowerendcap.universes = lattice_univs1
+    #lat_lowerendcap = openmc.HexLattice()
+    #lat_lowerendcap.center = (0.0, 0.0, 0.5 * (bottom_endcap + reactor_bottom))
+    #lat_lowerendcap.pitch = (cell_pitch, (reactor_bottom - bottom_endcap))
+    #lat_lowerendcap.outer = Ref_u
+    #lat_lowerendcap.orientation = 'x'
+    #lat_lowerendcap.universes = lattice_univs1
     # upper endcap
-    lat_upperendcap = openmc.HexLattice()
-    lat_upperendcap.center = (0.0, 0.0, 0.5 * (top_endcap + reactor_top))
-    lat_upperendcap.pitch = (cell_pitch, (top_endcap - reactor_top))
-    lat_upperendcap.outer = Ref_u
-    lat_upperendcap.orientation = 'x'
-    lat_upperendcap.universes = lattice_univs1
+    #lat_upperendcap = openmc.HexLattice()
+    #lat_upperendcap.center = (0.0, 0.0, 0.5 * (top_endcap + reactor_top))
+    #lat_upperendcap.pitch = (cell_pitch, (top_endcap - reactor_top))
+    #lat_upperendcap.outer = Ref_u
+    #lat_upperendcap.orientation = 'x'
+    #lat_upperendcap.universes = lattice_univs1
+Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
+Upperendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
     # upper grid
     lat_uppergrid = openmc.HexLattice()
     lat_uppergrid.center = (0.0, 0.0, 0.5 * (top_endcap + top_grid))
