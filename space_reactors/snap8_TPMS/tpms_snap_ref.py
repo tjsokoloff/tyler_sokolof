@@ -915,100 +915,33 @@ Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_botto
     model.settings.export_to_xml()
     model.export_to_xml()
 
-    m_colors[fuel]               = 'orange'
-    m_colors[ceramic]            = 'darkgreen'
-    m_colors[gap]                = 'grey'
-    m_colors[clad]               = 'darkviolet'
-    m_colors[coolant]            = 'turquoise'
-    m_colors[refl_mix] = 'slateblue'
-    m_colors[reflector]          = 'green'
-    m_colors[barrel]             = 'black'
-    m_colors[air]                = 'pink'
+        # colors for the full-reactor plot (already built above), plus the TPMS fuel plot colors
+    tpms_colors = {fuel: 'red', clad: 'grey', gap: 'yellow', coolant: 'blue'}
 
-    plot1          = openmc.Plot()
-    plot1.filename = 'plotI'
-    plot1.width    = (50., 50.)
-    plot1.basis    = 'xz'
-    plot1.origin   = (0.0, 0.0, reactor_height / 2.0)
-    plot1.pixels   = (5000, 5000)
-    plot1.color_by = 'material'
-    plot1.to_ipython_image()
-        
-    plot2          = openmc.Plot()
-    plot2.filename = 'plotII'
-    plot2.basis    = 'xy'
-    plot2.width    = (50.0, 50.0)
-    plot2.origin   = (0.0, 0.0, axial_section_height / 4.0)
-    plot2.pixels   = (5000, 5000)
-    plot2.color_by = 'material'
-    plot2.colors   = m_colors
-    plot2.to_ipython_image()
-    
-    plot3          = openmc.Plot()
-    plot3.filename = 'plotIII'
-    plot3.width    = (2.0, 2.0)
-    plot3.basis    = 'xy'
-    plot3.origin   = (0.0, 0.0, axial_section_height / 4.0)
-    plot3.pixels   = (1000, 1000)
-    plot3.color_by = 'material'
-    plot3.colors   = m_colors
-    plot3.to_ipython_image()
+    z_mid    = reactor_height / 2.0
+    z_center = 0.5 * (bottom_grid + top_grid)     # center of the whole model, grids included
 
-    plot4          = openmc.Plot()
-    plot4.filename = 'plotIV'
-    plot4.width    = (10.0, 10.0)
-    plot4.basis    = 'xy'
-    plot4.origin   = (0.0, 0.0, axial_section_height / 4.0)
-    plot4.pixels   = (2000, 2000)
-    plot4.color_by = 'material'
-    plot4.colors   = m_colors
-    plot4.to_ipython_image()
-    
-    plot5          = openmc.Plot()
-    plot5.filename = 'plotV'
-    plot5.width    = (50.0, 50.0)
-    plot5.basis    = 'xy'
-    plot5.origin   = (0.0, 0.0, axial_section_height / 4.0)
-    plot5.pixels   = (2000, 2000)
-    plot5.color_by = 'material'
-    plot5.colors   = m_colors
-    plot5.to_ipython_image()
+    # 1) Full reactor (side view: grids, endcaps, core, barrel, reflector)
+    plot_reactor          = openmc.Plot()
+    plot_reactor.filename = 'plot_reactor'
+    plot_reactor.basis    = 'xz'
+    plot_reactor.origin   = (0.0, 0.0, z_center)
+    plot_reactor.width    = (2 * radius4 + 2, (top_grid - bottom_grid) + 2)
+    plot_reactor.pixels   = (2000, int(2000 * plot_reactor.width[1] / plot_reactor.width[0]))
+    plot_reactor.color_by = 'material'
+    plot_reactor.colors   = m_colors
+    plot_reactor.to_ipython_image()
 
-    plot6          = openmc.Plot()
-    plot6.filename = 'plotVI'
-    plot6.width    = (50., 50.)
-    plot6.basis    = 'xy'
-    plot6.origin   = (0.0, 0.0, ((bottom_endcap+bottom_grid)/ 2.0))
-    plot6.pixels   = (5000, 5000)
-    plot6.color_by = 'material'
-    plot6.to_ipython_image()
-
-    plot7          = openmc.Plot()
-    plot7.filename = 'plotVII'
-    plot7.width    = (50., 50.)
-    plot7.basis    = 'xy'
-    plot7.origin   = (0.0, 0.0, ((bottom_endcap+reactor_bottom)/ 2.0))
-    plot7.pixels   = (5000, 5000)
-    plot7.color_by = 'material'
-    plot7.to_ipython_image()
-
-    plot8          = openmc.Plot()
-    plot8.filename = 'plotVIII'
-    plot8.width    = (50., 50.)
-    plot8.basis    = 'xy'
-    plot8.origin   = (0.0, 0.0, ((reactor_top+top_endcap)/ 2.0))
-    plot8.pixels   = (5000, 5000)
-    plot8.color_by = 'material'
-    plot8.to_ipython_image()
-
-    plot9          = openmc.Plot()
-    plot9.filename = 'plotIX'
-    plot9.width    = (50., 50.)
-    plot9.basis    = 'xy'
-    plot9.origin   = (0.0, 0.0, ((top_endcap+top_grid)/ 2.0))
-    plot9.pixels   = (5000, 5000)
-    plot9.color_by = 'material'
-    plot9.to_ipython_image()
+    # 2) Fuel TPMS (your pincell plot code, applied to the reactor fuel)
+    plot_xy          = openmc.Plot()
+    plot_xy.filename = 'plot_fuel_tpms'
+    plot_xy.basis    = 'xy'
+    plot_xy.origin   = (0.0, 0.0, z_mid)
+    plot_xy.width    = (2 * tpms_period, 2 * tpms_period)   # two periods so you can see it repeat
+    plot_xy.pixels   = (800, 800)
+    plot_xy.color_by = 'material'
+    plot_xy.colors   = tpms_colors
+    plot_xy.to_ipython_image()
 
    
     return model
