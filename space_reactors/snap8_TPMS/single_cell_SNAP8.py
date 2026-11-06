@@ -783,39 +783,39 @@ for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
         lat_uppergrid.orientation = 'x'
         lat_uppergrid.universes = lattice_univs2
 
-    hex0= 13.03
-    hex1= 13.03
-    radius0 =11
-    radius1 = radius0 + 0.159004
-    radius3 = 20.18
-    radius4 = 27.426
+        hex0= 13.03
+        hex1= 13.03
+        radius0 =11
+        radius1 = radius0 + 0.159004
+        radius3 = 20.18
+        radius4 = 27.426
 
-    barrel_inner = openmc.ZCylinder(r=radius0)
-    barrel_outer = openmc.ZCylinder(r=radius1)
-    bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
-    other_surface = openmc.model.HexagonalPrism(hex1, 'x')
-    outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
-    outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
+        barrel_inner = openmc.ZCylinder(r=radius0)
+        barrel_outer = openmc.ZCylinder(r=radius1)
+        bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
+        other_surface = openmc.model.HexagonalPrism(hex1, 'x')
+        outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
+        outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
 
-    Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
-    Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
-    Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
-    Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
-    Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
-    Internal_lower = openmc.Cell(region=+bundle_surface & -barrel_outer & +bottom & -core_bottom)
-    Internal_upper = openmc.Cell(region=+bundle_surface & -barrel_outer & +core_top & -top)
-    Barrel = openmc.Cell(fill=barrel, region=+barrel_inner & -barrel_outer & +bottom & -top)
-    #Outer_Ref = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_middle & +bottom & -top)
-    Outer_Ref_bottom = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_top_bot & +core_bottom & -z1)
-    Outer_Ref_middle = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_middle & +z1 & -z2)
-    Outer_Ref_top = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_top_bot & +z2 & -core_top)
-    Outer_gap_bottom1 = openmc.Cell(fill=air, region=+outer_ref_top_bot & -outer_ref_middle & +bottom & -z1)
-    Outer_gap_bottom2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +bottom & -core_bottom)
-    Outer_gap_top1 = openmc.Cell(fill=air, region=+outer_ref_top_bot & -outer_ref_middle & +z2 & -top)
-    Outer_gap_top2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +core_top & -top)
+        Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
+        Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
+        Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
+        Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
+        Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
+        Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
+        Internal_lower = openmc.Cell(region=+bundle_surface & -barrel_outer & +bottom & -core_bottom)
+        Internal_upper = openmc.Cell(region=+bundle_surface & -barrel_outer & +core_top & -top)
+        Barrel = openmc.Cell(fill=barrel, region=+barrel_inner & -barrel_outer & +bottom & -top)
+        #Outer_Ref = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_middle & +bottom & -top)
+        Outer_Ref_bottom = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_top_bot & +core_bottom & -z1)
+        Outer_Ref_middle = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_middle & +z1 & -z2)
+        Outer_Ref_top = openmc.Cell(fill=reflector, region=+barrel_outer & -outer_ref_top_bot & +z2 & -core_top)
+        Outer_gap_bottom1 = openmc.Cell(fill=air, region=+outer_ref_top_bot & -outer_ref_middle & +bottom & -z1)
+        Outer_gap_bottom2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +bottom & -core_bottom)
+        Outer_gap_top1 = openmc.Cell(fill=air, region=+outer_ref_top_bot & -outer_ref_middle & +z2 & -top)
+        Outer_gap_top2 = openmc.Cell(fill=air, region=+barrel_outer & -outer_ref_top_bot & +core_top & -top)
     
-    geometry = openmc.Geometry([Lowergrid, Lowerendcap, Upperendcap, Uppergrid, Bundle, 
+        geometry = openmc.Geometry([Lowergrid, Lowerendcap, Upperendcap, Uppergrid, Bundle, 
                                 Barrel, Internal_ref, Internal_lower, Internal_upper,  
                                 Outer_Ref_bottom, Outer_Ref_middle, Outer_Ref_top,
                                 Outer_gap_bottom1, Outer_gap_bottom2, Outer_gap_top1, Outer_gap_top2])
