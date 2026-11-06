@@ -841,7 +841,7 @@ for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
         f_6_IDs = sum([list(mat_dict) for mat_dict in f_6_cells], [])
         f_7_IDs = sum([list(mat_dict) for mat_dict in f_7_cells], [])
         f_8_IDs = sum([list(mat_dict) for mat_dict in f_8_cells], [])
-	    f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
+	f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
 	f_10_IDs = sum([list(mat_dict) for mat_dict in f_10_cells], [])
 	f_11_IDs = sum([list(mat_dict) for mat_dict in f_11_cells], [])
 	f_12_IDs = sum([list(mat_dict) for mat_dict in f_12_cells], [])
