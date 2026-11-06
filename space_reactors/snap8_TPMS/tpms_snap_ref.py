@@ -892,7 +892,7 @@ Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_botto
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 1500
+    settings.particles = 15000
     settings.inactive = 5
     settings.batches = 50
     settings.temperature['method'] = 'interpolation'
