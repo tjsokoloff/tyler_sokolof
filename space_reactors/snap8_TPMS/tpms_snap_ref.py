@@ -515,35 +515,35 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 	
-      tpms_period = 2.0          # cm, feature size of one gyroid period
-clad_frac   = 0.1182       # volume fractions (must sum to < 1; remainder = gap)
-cool_frac   = 0.6326
-fuel_frac   = 0.2342
+    tpms_period = 2.0          # cm, feature size of one gyroid period
+    clad_frac   = 0.1182       # volume fractions (must sum to < 1; remainder = gap)
+    cool_frac   = 0.6326
+    fuel_frac   = 0.2342
 
-iso_clad1 = cool_frac / 2
-iso_gap1  = iso_clad1 + clad_frac / 2
-iso_fuel1 = 0.5 - fuel_frac / 2
-iso_fuel2 = 0.5 + fuel_frac / 2
-iso_gap2  = 1 - iso_gap1
-iso_clad2 = 1 - iso_clad1
+    iso_clad1 = cool_frac / 2
+    iso_gap1  = iso_clad1 + clad_frac / 2
+    iso_fuel1 = 0.5 - fuel_frac / 2
+    iso_fuel2 = 0.5 + fuel_frac / 2
+    iso_gap2  = 1 - iso_gap1
+    iso_clad2 = 1 - iso_clad1
 
-(t_clad1, t_gap1, t_fuel1, t_fuel2, t_gap2, t_clad2) = openmc.TPMS.from_relative_densities(
-    "Gyroid",
-    [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2],
-    tpms_period)
+    (t_clad1, t_gap1, t_fuel1, t_fuel2, t_gap2, t_clad2) = openmc.TPMS.from_relative_densities(
+        "Gyroid",
+        [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2],
+        tpms_period)
 
-fuel_cell  = openmc.Cell(fill=fuel,    region=+t_fuel1 & -t_fuel2)
-clad_cell1 = openmc.Cell(fill=clad,    region=+t_clad1 & -t_gap1)
-clad_cell2 = openmc.Cell(fill=clad,    region=+t_gap2  & -t_clad2)
-gap_cell1  = openmc.Cell(fill=gap,     region=+t_gap1  & -t_fuel1)
-gap_cell2  = openmc.Cell(fill=gap,     region=+t_fuel2 & -t_gap2)
-NaK_cell   = openmc.Cell(fill=coolant, region=(-t_clad1 | +t_clad2))
+    fuel_cell  = openmc.Cell(fill=fuel,    region=+t_fuel1 & -t_fuel2)
+    clad_cell1 = openmc.Cell(fill=clad,    region=+t_clad1 & -t_gap1)
+    clad_cell2 = openmc.Cell(fill=clad,    region=+t_gap2  & -t_clad2)
+    gap_cell1  = openmc.Cell(fill=gap,     region=+t_gap1  & -t_fuel1)
+    gap_cell2  = openmc.Cell(fill=gap,     region=+t_fuel2 & -t_gap2)
+    NaK_cell   = openmc.Cell(fill=coolant, region=(-t_clad1 | +t_clad2))
 
-fuel_cell.temperature = 934.6035
-clad_cell1.temperature = clad_cell2.temperature = 934.6035
-gap_cell1.temperature = gap_cell2.temperature = 934.6035
+    fuel_cell.temperature = 934.6035
+    clad_cell1.temperature = clad_cell2.temperature = 934.6035
+    gap_cell1.temperature = gap_cell2.temperature = 934.6035
 
-pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
+    pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
                                gap_cell1, gap_cell2, NaK_cell))
     
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
