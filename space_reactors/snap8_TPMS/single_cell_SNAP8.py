@@ -503,10 +503,38 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     #reflMix = openmc.Material.mix_materials([barrel, clad, internal_reflector, air], [0.191, 0.042, 0.41, 0.357], 'vo')
 
-    # TPMS clipped to the barrel
-    #fuel_cell = openmc.Cell(fill=fuel,    region=fuel_region & tpms_region)
-    #void_cell = openmc.Cell(fill=coolant, region=fuel_region & ~tpms_region)
-    #wall_cell = openmc.Cell(fill=steel,   region=wall_region)
+    pitch = 1               # [cm]
+    region1 = Box(pitch, "periodic")
+
+###################### FILL this variables with the volumetric fractions you need ###########################################
+    clad_dens  = 0.1182
+    cool_dens  = 0.6326
+    fuel_dens  = 0.2342
+    void_dens  = 1 - (clad_dens + cool_dens + fuel_dens)  # gap tra fuel e clad
+
+######################## coolant | clad | gap | fuel | gap | clad | coolant ################################################
+    iso_clad1  = cool_dens / 2
+    iso_gap1   = iso_clad1 + clad_dens/2
+    iso_fuel1  = 0.5 - fuel_dens/2
+    iso_fuel2  = 0.5 + fuel_dens/2
+    iso_gap2   = 1 - iso_gap1
+    iso_clad2  = 1 - iso_clad1
+
+     (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid",
+         [iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
+
+    # Define cellss
+    cell_fuel  = openmc.Cell(0, "cFuel", mFuel, region1 & +tpms_fuel1 & -tpms_fuel2)
+    cell_clad1 = openmc.Cell(1, "cClad", mClad, region1 & +tpms_clad1 & -tpms_gap1)
+    cell_clad2 = openmc.Cell(2, "cClad", mClad, region1 & +tpms_gap2  & -tpms_clad2)
+    cell_gap1  = openmc.Cell(3, "cGap",  None,  region1 & +tpms_gap1  & -tpms_fuel1)
+    cell_gap2  = openmc.Cell(4, "cGap",  None,  region1 & +tpms_fuel2 & -tpms_gap2)
+    cell_cool  = openmc.Cell(5, "cCool", mCool, region1 & (-tpms_clad1 | +tpms_clad2))
+
+    universe = openmc.Universe(0, "universe",[cell_fuel, cell_clad1, cell_clad2, cell_gap1, cell_gap2, cell_cool])
+    root = openmc.Cell(6, "root", universe, region1)
+    geometry = openmc.Geometry([root])
+    geometry.export_to_xml()
 
     # Instantiate a Materials collection and export to xml
     model.materials = openmc.Materials((fuel, ceramic, gap, clad, coolant, barrel, reflector, refl_mix,  
@@ -778,7 +806,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
+    #Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
+	
     Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
     Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
     Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
