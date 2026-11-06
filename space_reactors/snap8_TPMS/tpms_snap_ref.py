@@ -545,7 +545,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
                                gap_cell1, gap_cell2, NaK_cell))
-    geometry = openmc.Geometry([root])
+    root = openmc.Cell(6, "root", universe, region1)
+	geometry = openmc.Geometry([root])
     geometry.export_to_xml()
 	
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
