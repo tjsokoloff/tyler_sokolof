@@ -627,9 +627,6 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         SS_cell = openmc.Cell(fill=air)
         
         fuel_cell.temperature = 934.6035
-        ceramic_cell.temperature = 934.6035
-        gap_cell.temperature = 934.6035
-        clad_cell.temperature = 934.6035
         NaK_cell.temperature = T
         Ref_cell.temperature = 870
         SS_cell.temperature = T
