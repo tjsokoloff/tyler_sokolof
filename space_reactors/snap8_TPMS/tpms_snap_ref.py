@@ -1,7 +1,6 @@
 #SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.py
 from pprint import pprint
 from argparse import ArgumentParser
-	lol
 import math
 import numpy as np
 import matplotlib.pyplot as plt
