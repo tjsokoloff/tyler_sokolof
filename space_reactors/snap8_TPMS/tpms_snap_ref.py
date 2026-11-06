@@ -545,7 +545,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
                                gap_cell1, gap_cell2, NaK_cell))
-    geometry = openmc.Geometry([root])
+    root = openmc.Cell(6, "root", universe, region1)
+	geometry = openmc.Geometry([root])
     geometry.export_to_xml()
 	
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
@@ -633,9 +634,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         Ref_cell.temperature = 870
         SS_cell.temperature = T
         
-        pin_u = openmc.Universe(cells=(fuel_cell, NaK_cell))
-        NaK_u = openmc.Universe(cells=(all_NaK_cell,))
-        Ref_u = openmc.Universe(cells=(Ref_cell,))
+        #pin_u = openmc.Universe(cells=(fuel_cell, NaK_cell))
+        #NaK_u = openmc.Universe(cells=(all_NaK_cell,))
+        #Ref_u = openmc.Universe(cells=(Ref_cell,))
 
         lowergrid_S = openmc.Universe(cells=(lower_grid_S_cell,))
         uppergrid_S = openmc.Universe(cells=(upper_grid_S_cell,))
@@ -644,30 +645,30 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         lower_grid_u = openmc.Universe(cells=(uppergrid_hole_cell, lower_grid_cell))
         upper_grid_u = openmc.Universe(cells=(lowergrid_hole_cell, upper_grid_cell))
 
-        f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
-        f_23 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_0  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_1  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_2  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_3  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_4  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_5  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_6  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_7  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_8  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_9  = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_10 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_11 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_12 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_13 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_14 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_15 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_16 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_17 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_18 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_19 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_20 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_21 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_22 = pin_u.clone(clone_materials=True, clone_regions=False)
+        #f_23 = pin_u.clone(clone_materials=True, clone_regions=False)
 
         f_0_cells.append(f_0.get_all_materials().keys())
         f_1_cells.append(f_1.get_all_materials().keys())
@@ -695,17 +696,17 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         f_23_cells.append(f_23.get_all_materials().keys())
         
         # Create rings of fuel universes that will fill the lattice
-        ring9 = [Ref_u]*54
-        ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
-        ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
-        ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
-        ring5 = [f_9, f_10, f_11, f_11, f_10]*6
-        ring4 = [f_6, f_7, f_8, f_7]*6
-        ring3 = [f_4, f_5, f_5]*6
-        ring2 = [f_2, f_3]*6
-        ring1 = [f_1]*6
-        ring0 = [f_0]*1
-        lattice_univs.append([ring0])
+        #ring9 = [Ref_u]*54
+        #ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
+        #ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
+        #ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
+        #ring5 = [f_9, f_10, f_11, f_11, f_10]*6
+        #ring4 = [f_6, f_7, f_8, f_7]*6
+        #ring3 = [f_4, f_5, f_5]*6
+        #ring2 = [f_2, f_3]*6
+        #ring1 = [f_1]*6
+        #ring0 = [f_0]*1
+        #lattice_univs.append([ring0])
 
         # Create rings of endcap universes that will fill the lattice
         #endcap_ring10 = [Ref_u]*60
