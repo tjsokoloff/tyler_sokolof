@@ -1,18 +1,16 @@
 #SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.py
-from pprint import pprint 
-from argparse import ArgumentParser 
+from pprint import pprint
+from argparse import ArgumentParser
 
-import math 
-import numpy as np 
-import matplotlib.pyplot as plt 
+import math
+import numpy as np
+import matplotlib.pyplot as plt
 
-import openmc 
-import openmc.lib 
-import sys 
-import os 
-import volume from matplotlib 
-import pyplot as plt from warnings 
-import warn
+import openmc
+import openmc.lib
+import sys
+import os
+
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
