@@ -195,5 +195,5 @@ settings.export_to_xml()
 #openmc.calculate_volumes()
 
 openmc.run(threads=8)
-materials.append(mFuel)
-    return mFuel, materials, mColors
+#materials.append(mFuel)
+ #   return mFuel, materials, mColors
