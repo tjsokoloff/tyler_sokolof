@@ -549,11 +549,11 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
     z2 = openmc.ZPlane(surface_id=6, z0=32.6917) 
 
-    #r_hole = openmc.ZCylinder(surface_id=7, r=0.0794) # gridplate holes
-    #z3 = openmc.ZPlane(surface_id=8, z0=bottom_grid, boundary_type='vacuum') # lower grid
-    #z4 = openmc.ZPlane(surface_id=9, z0=bottom_endcap) # lower endcap
-    #z5 = openmc.ZPlane(surface_id=10, z0=top_endcap) # upper endcap
-    #z6 = openmc.ZPlane(surface_id=11, z0=top_grid, boundary_type='vacuum') # upper grid
+    r_hole = openmc.ZCylinder(surface_id=7, r=0.0794) # gridplate holes
+    z3 = openmc.ZPlane(surface_id=8, z0=bottom_grid, boundary_type='vacuum') # lower grid
+    z4 = openmc.ZPlane(surface_id=9, z0=bottom_endcap) # lower endcap
+    z5 = openmc.ZPlane(surface_id=10, z0=top_endcap) # upper endcap
+    z6 = openmc.ZPlane(surface_id=11, z0=top_grid, boundary_type='vacuum') # upper grid
 
     core_top = openmc.ZPlane(surface_id=12, z0=reactor_top)
     core_bottom = openmc.ZPlane(surface_id=13, z0=reactor_bottom) 
