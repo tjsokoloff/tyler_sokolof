@@ -706,18 +706,18 @@ pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
         lattice_univs.append([ring0])
 
         # Create rings of endcap universes that will fill the lattice
-        endcap_ring10 = [Ref_u]*60
-        endcap_ring9 = [Ref_u]*54
-        endcap_ring8 = ([Ref_u] + [endcap_u, endcap_u, endcap_u, endcap_u, endcap_u, endcap_u, endcap_u]) * 6
-        endcap_ring7 = [endcap_u]*42
-        endcap_ring6 = [endcap_u]*36
-        endcap_ring5 = [endcap_u]*30
-        endcap_ring4 = [endcap_u]*24
-        endcap_ring3 = [endcap_u]*18
-        endcap_ring2 = [endcap_u]*12
-        endcap_ring1 = [endcap_u]*6
-        endcap_ring0 = [endcap_u]*1
-        lattice_univs1.append([endcap_ring10, endcap_ring9, endcap_ring8, endcap_ring7, endcap_ring6, endcap_ring5, 
+        #endcap_ring10 = [Ref_u]*60
+        #endcap_ring9 = [Ref_u]*54
+        #endcap_ring8 = ([Ref_u] + [endcap_u, endcap_u, endcap_u, endcap_u, endcap_u, endcap_u, endcap_u]) * 6
+        #endcap_ring7 = [endcap_u]*42
+        #endcap_ring6 = [endcap_u]*36
+        #endcap_ring5 = [endcap_u]*30
+        #endcap_ring4 = [endcap_u]*24
+        #endcap_ring3 = [endcap_u]*18
+        #endcap_ring2 = [endcap_u]*12
+        #endcap_ring1 = [endcap_u]*6
+        #endcap_ring0 = [endcap_u]*1
+        #lattice_univs1.append([endcap_ring10, endcap_ring9, endcap_ring8, endcap_ring7, endcap_ring6, endcap_ring5, 
                                endcap_ring4, endcap_ring3, endcap_ring2, endcap_ring1, endcap_ring0])
 
         # Create rings of uppergrid universes that will fill the lattice
