@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 from warnings import warn
 
 
-fuel_r = .2
+fuel_r = 5
 
 fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
