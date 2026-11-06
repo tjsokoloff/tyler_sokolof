@@ -15,6 +15,12 @@ from openmc import volume
 from matplotlib import pyplot as plt
 from warnings import warn
 
+# Choose the algorithm: "brent", "bisection", "toms748", "newton"
+os.environ["TPMS_SOLVER"] = "brent"
+# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
+os.environ["TPMS_BRACKET"] = "derivatives"    
+# Choose the number of subintervals you want in case you chose the "subintervals" method
+os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -40,7 +46,7 @@ outlet_P = 254000                    # fluid outlet pressure (Pa)
 
 # other full core specifications used to construct the unit cell model
 
-n_fuel_pins = 211          # number of fuel rods per assembly
+n_fuel_pins = 1          # number of fuel rods per assembly
 																
 num_layers_for_plots = 30                # number of averaging layers for making plots
 
