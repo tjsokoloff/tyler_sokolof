@@ -542,7 +542,7 @@ NaK_cell   = openmc.Cell(fill=coolant, region=(-t_clad1 | +t_clad2))
 fuel_cell.temperature = 934.6035
 clad_cell1.temperature = clad_cell2.temperature = 934.6035
 gap_cell1.temperature = gap_cell2.temperature = 934.6035
-NaK_cell.temperature = T
+#NaK_cell.temperature = T
 
 pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
                                gap_cell1, gap_cell2, NaK_cell))
