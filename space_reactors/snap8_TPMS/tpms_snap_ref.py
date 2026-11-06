@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import openmc 
 import openmc.lib 
 import sys 
-import os from openmc 
+import os 
 import volume from matplotlib 
 import pyplot as plt from warnings 
 import warn
