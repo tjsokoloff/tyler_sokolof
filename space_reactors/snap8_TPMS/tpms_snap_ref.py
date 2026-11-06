@@ -508,7 +508,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
                                         air, upper_grid, lower_grid, endcaps))
     model.materials.export_to_xml()
 	
-    r_pin = openmc.ZCylinder(surface_id=1, r=1) 
+    r_pin = openmc.ZCylinder(surface_id=1, r=fuel_r) 
     ceramic_or = openmc.ZCylinder(surface_id=2, r= (fuel_r + .005)) 
     clad_ir = openmc.ZCylinder(surface_id=3, r= (fuel_r + .01))
     clad_or = openmc.ZCylinder(surface_id=4, r= (fuel_r + .015))  
