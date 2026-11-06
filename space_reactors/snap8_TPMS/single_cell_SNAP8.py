@@ -15,6 +15,36 @@ from warnings import warn
 
 
 fuel_r = 11
+def Barrel(r: float, h: float, boundary_type="transmission"):
+    cyl = openmc.ZCylinder(r=r, boundary_type=boundary_type)
+    z0 = openmc.ZPlane(-h/2, boundary_type=boundary_type)
+    z1 = openmc.ZPlane(+h/2, boundary_type=boundary_type)
+
+    if boundary_type == "periodic":
+        z0.periodic_surface = z1   # only the axial planes can pair up
+
+    return -cyl & +z0 & -z1
+radius0 = 11
+radius1 = radius0 + 0.159004
+radius3 = 20.18
+radius4 = 27.426
+height  = 20.0     # set to your fuel height
+
+# Fuel region = inside the barrel
+fuel_region = Barrel(radius0, height)          # replaces Box(c)
+
+# Barrel wall as a shell, with the same axial limits
+inner = openmc.ZCylinder(r=radius0)
+outer = openmc.ZCylinder(r=radius1)
+zmin  = openmc.ZPlane(-height/2)
+zmax  = openmc.ZPlane(+height/2)
+wall_region = +inner & -outer & +zmin & -zmax
+
+# TPMS clipped to the barrel
+fuel_cell = openmc.Cell(fill=fuel,    region=fuel_region & tpms_region)
+void_cell = openmc.Cell(fill=coolant, region=fuel_region & ~tpms_region)
+wall_cell = openmc.Cell(fill=steel,   region=wall_region)
+
 
 fuel_diameter = 10                # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
@@ -759,17 +789,17 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
 
     hex0= 13.03
     hex1= 13.03
-    radius0 =11
-    radius1 = radius0 + 0.159004
-    radius3 = 20.18
-    radius4 = 27.426
+    #radius0 =11
+    #radius1 = radius0 + 0.159004
+    #radius3 = 20.18
+    #radius4 = 27.426
 
-    barrel_inner = openmc.ZCylinder(r=radius0)
-    barrel_outer = openmc.ZCylinder(r=radius1)
+   # barrel_inner = openmc.ZCylinder(r=radius0)
+   # barrel_outer = openmc.ZCylinder(r=radius1)
     bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
-    other_surface = openmc.model.HexagonalPrism(hex1, 'x')
-    outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
-    outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
+   # other_surface = openmc.model.HexagonalPrism(hex1, 'x')
+    #outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
+    #outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
