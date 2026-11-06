@@ -530,9 +530,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #reflMix = openmc.Material.mix_materials([barrel, clad, internal_reflector, air], [0.191, 0.042, 0.41, 0.357], 'vo')
 
     # TPMS clipped to the barrel
-    fuel_cell = openmc.Cell(fill=fuel,    region=fuel_region & tpms_region)
-    void_cell = openmc.Cell(fill=coolant, region=fuel_region & ~tpms_region)
-    wall_cell = openmc.Cell(fill=steel,   region=wall_region)
+    #fuel_cell = openmc.Cell(fill=fuel,    region=fuel_region & tpms_region)
+    #void_cell = openmc.Cell(fill=coolant, region=fuel_region & ~tpms_region)
+    #wall_cell = openmc.Cell(fill=steel,   region=wall_region)
 
     # Instantiate a Materials collection and export to xml
     model.materials = openmc.Materials((fuel, ceramic, gap, clad, coolant, barrel, reflector, refl_mix,  
