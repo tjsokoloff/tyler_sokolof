@@ -627,9 +627,6 @@ pin_u = openmc.Universe(cells=(fuel_cell, clad_cell1, clad_cell2,
         SS_cell = openmc.Cell(fill=air)
         
         fuel_cell.temperature = 934.6035
-        ceramic_cell.temperature = 934.6035
-        gap_cell.temperature = 934.6035
-        clad_cell.temperature = 934.6035
         NaK_cell.temperature = T
         Ref_cell.temperature = 870
         SS_cell.temperature = T
