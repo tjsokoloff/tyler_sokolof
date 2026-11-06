@@ -864,7 +864,7 @@ model.materials = materials
 
     # iterate through all materials
     # if depletable, look in each of the lists and assign volume depending on which list
-    fuel_id_groups = {
+fuel_id_groups = {
     1: f_0_IDs,
     6: f_1_IDs + f_2_IDs + f_3_IDs + f_4_IDs + f_6_IDs + f_8_IDs + f_9_IDs + f_12_IDs + f_15_IDs + f_16_IDs + f_23_IDs,
     12: f_5_IDs + f_7_IDs + f_10_IDs + f_11_IDs + f_13_IDs + f_14_IDs + f_17_IDs + f_18_IDs + f_19_IDs + f_20_IDs + f_21_IDs + f_22_IDs}
