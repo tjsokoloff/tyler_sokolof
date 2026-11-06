@@ -631,7 +631,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         Ref_cell.temperature = 870
         SS_cell.temperature = T
         
-        pin_u = openmc.Universe(cells=(fuel_cell, ceramic_cell, gap_cell, clad_cell, NaK_cell))
+        pin_u = openmc.Universe(cells=(fuel_cell, NaK_cell))
         NaK_u = openmc.Universe(cells=(all_NaK_cell,))
         Ref_u = openmc.Universe(cells=(Ref_cell,))
 
