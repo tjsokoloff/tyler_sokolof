@@ -539,8 +539,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height / 100  
     #ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height / 100
 
-    fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height
-    ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height
+    fuel_volume_per_pin = math.pi * r_pin * r_pin * axial_section_height
+    ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (r_pin*r_pin)) * axial_section_height
 
     axial_coords = np.linspace(reactor_bottom, reactor_top, n_ax_zones + 1)
     lattice_univs = []
