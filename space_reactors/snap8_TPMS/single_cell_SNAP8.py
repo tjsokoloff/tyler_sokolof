@@ -570,21 +570,21 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     
     m_colors = {}
  ###################### FILL this variables with the volumetric fractions you need ###########################################
-        clad_dens  = 0.1182
-        cool_dens  = 0.6326
-        fuel_dens  = 0.2342
-        void_dens  = 1 - (clad_dens + cool_dens + fuel_dens)  # gap tra fuel e clad
+    clad_dens  = 0.1182
+    cool_dens  = 0.6326
+    fuel_dens  = 0.2342
+    void_dens  = 1 - (clad_dens + cool_dens + fuel_dens)  # gap tra fuel e clad
 
 ######################## coolant | clad | gap | fuel | gap | clad | coolant ################################################
-        iso_clad1  = cool_dens / 2
-        iso_gap1   = iso_clad1 + clad_dens/2
-        iso_fuel1  = 0.5 - fuel_dens/2
-        iso_fuel2  = 0.5 + fuel_dens/2
-        iso_gap2   = 1 - iso_gap1
-        iso_clad2  = 1 - iso_clad1
+    iso_clad1  = cool_dens / 2
+    iso_gap1   = iso_clad1 + clad_dens/2
+    iso_fuel1  = 0.5 - fuel_dens/2
+    iso_fuel2  = 0.5 + fuel_dens/2
+    iso_gap2   = 1 - iso_gap1
+    iso_clad2  = 1 - iso_clad1
 
-        (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid",
-				[iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
+    (tpms_clad1, tpms_gap1, tpms_fuel1, tpms_fuel2, tpms_gap2, tpms_clad2) = openmc.TPMS.from_relative_densities( "Gyroid",
+			[iso_clad1, iso_gap1, iso_fuel1, iso_fuel2, iso_gap2, iso_clad2], pitch)
 
     for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
         # use the middle of the axial section to compute the temperature and density
