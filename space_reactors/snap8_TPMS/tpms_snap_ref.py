@@ -10,6 +10,10 @@ import openmc
 import openmc.lib
 import sys
 import os
+#from TPMS
+from openmc import volume
+from matplotlib import pyplot as plt
+from warnings import warn
 
 
 fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
