@@ -805,8 +805,8 @@ Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_botto
     Upperendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
 	
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
-    Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
-    Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
+    Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
+    Bundle = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
     Upperendcap = openmc.Cell(fill=lat_upperendcap, region=-barrel_outer & +core_top & -z5)
     Uppergrid = openmc.Cell(fill=lat_uppergrid, region=-barrel_outer & +z5 & -top)
     Internal_ref = openmc.Cell(fill=refl_mix, region=+bundle_surface & -barrel_inner & +core_bottom & -core_top)
