@@ -747,41 +747,41 @@ for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
                                lowergrid_ring5, lowergrid_ring4, lowergrid_ring3, lowergrid_ring2, lowergrid_ring1, lowergrid_ring0])
 
 # Create the prism that will contain the lattice
-# active region
-    lat = openmc.HexLattice()
-    lat.center = (0.0, 0.0, 0.5 * (reactor_bottom + reactor_top))
-    lat.pitch = (cell_pitch, axial_section_height)
-    lat.outer = Ref_u
-    lat.orientation = 'x'
-    lat.universes = lattice_univs
+    # active region
+        lat = openmc.HexLattice()
+        lat.center = (0.0, 0.0, 0.5 * (reactor_bottom + reactor_top))
+        lat.pitch = (cell_pitch, axial_section_height)
+        lat.outer = Ref_u
+        lat.orientation = 'x'
+        lat.universes = lattice_univs
     # lower grid
-    lat_lowergrid = openmc.HexLattice()
-    lat_lowergrid.center = (0.0, 0.0, 0.5 * (bottom_grid + bottom_endcap))
-    lat_lowergrid.pitch = (cell_pitch, (bottom_endcap - bottom_grid))
-    lat_lowergrid.outer = lowergrid_S
-    lat_lowergrid.orientation = 'x'
-    lat_lowergrid.universes = lattice_univs3
+        lat_lowergrid = openmc.HexLattice()
+        lat_lowergrid.center = (0.0, 0.0, 0.5 * (bottom_grid + bottom_endcap))
+        lat_lowergrid.pitch = (cell_pitch, (bottom_endcap - bottom_grid))
+        lat_lowergrid.outer = lowergrid_S
+        lat_lowergrid.orientation = 'x'
+        lat_lowergrid.universes = lattice_univs3
     # lower endcap
-    lat_lowerendcap = openmc.HexLattice()
-    lat_lowerendcap.center = (0.0, 0.0, 0.5 * (bottom_endcap + reactor_bottom))
-    lat_lowerendcap.pitch = (cell_pitch, (reactor_bottom - bottom_endcap))
-    lat_lowerendcap.outer = Ref_u
-    lat_lowerendcap.orientation = 'x'
-    lat_lowerendcap.universes = lattice_univs1
+        lat_lowerendcap = openmc.HexLattice()
+        lat_lowerendcap.center = (0.0, 0.0, 0.5 * (bottom_endcap + reactor_bottom))
+        lat_lowerendcap.pitch = (cell_pitch, (reactor_bottom - bottom_endcap))
+        lat_lowerendcap.outer = Ref_u
+        lat_lowerendcap.orientation = 'x'
+        lat_lowerendcap.universes = lattice_univs1
     # upper endcap
-    lat_upperendcap = openmc.HexLattice()
-    lat_upperendcap.center = (0.0, 0.0, 0.5 * (top_endcap + reactor_top))
-    lat_upperendcap.pitch = (cell_pitch, (top_endcap - reactor_top))
-    lat_upperendcap.outer = Ref_u
-    lat_upperendcap.orientation = 'x'
-    lat_upperendcap.universes = lattice_univs1
+        lat_upperendcap = openmc.HexLattice()
+        lat_upperendcap.center = (0.0, 0.0, 0.5 * (top_endcap + reactor_top))
+        lat_upperendcap.pitch = (cell_pitch, (top_endcap - reactor_top))
+        lat_upperendcap.outer = Ref_u
+        lat_upperendcap.orientation = 'x'
+        lat_upperendcap.universes = lattice_univs1
     # upper grid
-    lat_uppergrid = openmc.HexLattice()
-    lat_uppergrid.center = (0.0, 0.0, 0.5 * (top_endcap + top_grid))
-    lat_uppergrid.pitch = (cell_pitch, (top_grid - top_endcap))
-    lat_uppergrid.outer = uppergrid_S
-    lat_uppergrid.orientation = 'x'
-    lat_uppergrid.universes = lattice_univs2
+        lat_uppergrid = openmc.HexLattice()
+        lat_uppergrid.center = (0.0, 0.0, 0.5 * (top_endcap + top_grid))
+        lat_uppergrid.pitch = (cell_pitch, (top_grid - top_endcap))
+        lat_uppergrid.outer = uppergrid_S
+        lat_uppergrid.orientation = 'x'
+        lat_uppergrid.universes = lattice_univs2
 
     hex0= 13.03
     hex1= 13.03
