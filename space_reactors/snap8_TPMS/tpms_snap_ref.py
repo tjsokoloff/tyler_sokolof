@@ -670,18 +670,18 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         f_23_cells.append(f_23.get_all_materials().keys())
         
         # Create rings of fuel universes that will fill the lattice
-        #ring9 = [Ref_u]*54
-        #ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
-        #ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
-        #ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
-        #ring5 = [f_9, f_10, f_11, f_11, f_10]*6
-        #ring4 = [f_6, f_7, f_8, f_7]*6
-        #ring3 = [f_4, f_5, f_5]*6
-        #ring2 = [f_2, f_3]*6
+        ring9 = [Ref_u]*54
+        ring8 = ([NaK_u] + [f_20, f_21, f_22, f_23, f_22, f_21, f_20]) * 6
+        ring7 = [f_16, f_17, f_18, f_19, f_19, f_18, f_17]*6
+        ring6 = [f_12, f_13, f_14, f_15, f_14, f_13]*6
+        ring5 = [f_9, f_10, f_11, f_11, f_10]*6
+        ring4 = [f_6, f_7, f_8, f_7]*6
+        ring3 = [f_4, f_5, f_5]*6
+        ring2 = [f_2, f_3]*6
         ring1 = [f_1]*6
         ring0 = [f_0]*1
-        lattice_univs.append([ring1, ring0])
-		#lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
+        #lattice_univs.append([ring1, ring0])
+		lattice_univs.append([ring9, ring8, ring7, ring6, ring5, ring4, ring3, ring2, ring1, ring0])
 
         # Create rings of endcap universes that will fill the lattice
         endcap_ring10 = [Ref_u]*60
