@@ -823,39 +823,39 @@ for z_min, z_max in zip(axial_coords[0:-1], axial_coords[1:]):
     #geometry = openmc.Geometry([Lowergrid, Lowerendcap, Upperendcap, Uppergrid, Bundle, Barrel, Internal_ref, 
                                 #Outer_Ref])
     
-    model.geometry = geometry
+        model.geometry = geometry
     #model.geometry.export_to_xml()
 
     # export materials from geometry    
-    mats_from_geom = list(geometry.get_all_materials().values())
-    mats_to_export = []
+        mats_from_geom = list(geometry.get_all_materials().values())
+        mats_to_export = []
 
-    geom_IDs = list(geometry.get_all_materials().keys())
+        geom_IDs = list(geometry.get_all_materials().keys())
     
-    f_0_IDs = sum([list(mat_dict) for mat_dict in f_0_cells], [])
-    f_1_IDs = sum([list(mat_dict) for mat_dict in f_1_cells], [])
-    f_2_IDs = sum([list(mat_dict) for mat_dict in f_2_cells], [])
-    f_3_IDs = sum([list(mat_dict) for mat_dict in f_3_cells], [])
-    f_4_IDs = sum([list(mat_dict) for mat_dict in f_4_cells], [])
-    f_5_IDs = sum([list(mat_dict) for mat_dict in f_5_cells], [])
-    f_6_IDs = sum([list(mat_dict) for mat_dict in f_6_cells], [])
-    f_7_IDs = sum([list(mat_dict) for mat_dict in f_7_cells], [])
-    f_8_IDs = sum([list(mat_dict) for mat_dict in f_8_cells], [])
-    f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
-    f_10_IDs = sum([list(mat_dict) for mat_dict in f_10_cells], [])
-    f_11_IDs = sum([list(mat_dict) for mat_dict in f_11_cells], [])
-    f_12_IDs = sum([list(mat_dict) for mat_dict in f_12_cells], [])
-    f_13_IDs = sum([list(mat_dict) for mat_dict in f_13_cells], [])
-    f_14_IDs = sum([list(mat_dict) for mat_dict in f_14_cells], [])
-    f_15_IDs = sum([list(mat_dict) for mat_dict in f_15_cells], [])
-    f_16_IDs = sum([list(mat_dict) for mat_dict in f_16_cells], [])
-    f_17_IDs = sum([list(mat_dict) for mat_dict in f_17_cells], [])
-    f_18_IDs = sum([list(mat_dict) for mat_dict in f_18_cells], [])
-    f_19_IDs = sum([list(mat_dict) for mat_dict in f_19_cells], [])
-    f_20_IDs = sum([list(mat_dict) for mat_dict in f_20_cells], [])
-    f_21_IDs = sum([list(mat_dict) for mat_dict in f_21_cells], [])
-    f_22_IDs = sum([list(mat_dict) for mat_dict in f_22_cells], [])
-    f_23_IDs = sum([list(mat_dict) for mat_dict in f_23_cells], [])
+        f_0_IDs = sum([list(mat_dict) for mat_dict in f_0_cells], [])
+        f_1_IDs = sum([list(mat_dict) for mat_dict in f_1_cells], [])
+        f_2_IDs = sum([list(mat_dict) for mat_dict in f_2_cells], [])
+        f_3_IDs = sum([list(mat_dict) for mat_dict in f_3_cells], [])
+        f_4_IDs = sum([list(mat_dict) for mat_dict in f_4_cells], [])
+        f_5_IDs = sum([list(mat_dict) for mat_dict in f_5_cells], [])
+    	f_6_IDs = sum([list(mat_dict) for mat_dict in f_6_cells], [])
+    	f_7_IDs = sum([list(mat_dict) for mat_dict in f_7_cells], [])
+    	f_8_IDs = sum([list(mat_dict) for mat_dict in f_8_cells], [])
+ 	   f_9_IDs = sum([list(mat_dict) for mat_dict in f_9_cells], [])
+	    f_10_IDs = sum([list(mat_dict) for mat_dict in f_10_cells], [])
+	    f_11_IDs = sum([list(mat_dict) for mat_dict in f_11_cells], [])
+	    f_12_IDs = sum([list(mat_dict) for mat_dict in f_12_cells], [])
+	    f_13_IDs = sum([list(mat_dict) for mat_dict in f_13_cells], [])
+	    f_14_IDs = sum([list(mat_dict) for mat_dict in f_14_cells], [])
+    	f_15_IDs = sum([list(mat_dict) for mat_dict in f_15_cells], [])
+	    f_16_IDs = sum([list(mat_dict) for mat_dict in f_16_cells], [])
+    	f_17_IDs = sum([list(mat_dict) for mat_dict in f_17_cells], [])
+    	f_18_IDs = sum([list(mat_dict) for mat_dict in f_18_cells], [])
+    	f_19_IDs = sum([list(mat_dict) for mat_dict in f_19_cells], [])
+    	f_20_IDs = sum([list(mat_dict) for mat_dict in f_20_cells], [])
+    	f_21_IDs = sum([list(mat_dict) for mat_dict in f_21_cells], [])
+    	f_22_IDs = sum([list(mat_dict) for mat_dict in f_22_cells], [])
+    	f_23_IDs = sum([list(mat_dict) for mat_dict in f_23_cells], [])
 
 
     # create materials object with correct volume information
