@@ -779,8 +779,6 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #lat_upperendcap.outer = Ref_u
     #lat_upperendcap.orientation = 'x'
     #lat_upperendcap.universes = lattice_univs1
-    Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
-    Upperendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
     # upper grid
     lat_uppergrid = openmc.HexLattice()
     lat_uppergrid.center = (0.0, 0.0, 0.5 * (top_endcap + top_grid))
@@ -802,7 +800,10 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     other_surface = openmc.model.HexagonalPrism(hex1, 'x')
     outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
     outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
-    
+
+Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
+    Upperendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
+	
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
     Bundle = openmc.Cell(fill=f_0, region=-barrel_inner & +core_bottom & -core_top)
