@@ -859,8 +859,8 @@ f_23_IDs = sum([list(mat_dict) for mat_dict in f_23_cells], [])
 
 
     # create materials object with correct volume information
-    materials = openmc.Materials(mats_to_export)
-    model.materials = materials
+materials = openmc.Materials(mats_to_export)
+model.materials = materials
 
     # iterate through all materials
     # if depletable, look in each of the lists and assign volume depending on which list
