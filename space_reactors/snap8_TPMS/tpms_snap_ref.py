@@ -801,7 +801,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
     outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
 
-Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
+    Lowerendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +z4 & -core_bottom)
     Upperendcap = openmc.Cell(fill=coolant, region=-barrel_outer & +core_top & -z5)
 	
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
