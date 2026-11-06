@@ -892,7 +892,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 1500
+    settings.particles = 15000
     settings.inactive = 5
     settings.batches = 50
     settings.temperature['method'] = 'interpolation'
