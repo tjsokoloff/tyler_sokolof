@@ -601,7 +601,21 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
         NaK_cell.temperature = T
         Ref_cell.temperature = 870
         SS_cell.temperature = T
-        
+
+###################### FILL this variables with the volumetric fractions you need ###########################################
+    clad_dens  = 0.1182
+    cool_dens  = 0.6326
+    fuel_dens  = 0.2342
+    void_dens  = 1 - (clad_dens + cool_dens + fuel_dens)  # gap tra fuel e clad
+
+######################## coolant | clad | gap | fuel | gap | clad | coolant ################################################
+    iso_clad1  = cool_dens / 2
+    iso_gap1   = iso_clad1 + clad_dens/2
+    iso_fuel1  = 0.5 - fuel_dens/2
+    iso_fuel2  = 0.5 + fuel_dens/2
+    iso_gap2   = 1 - iso_gap1
+    iso_clad2  = 1 - iso_clad1
+		
         pin_u = openmc.Universe(cells=(fuel_cell, ceramic_cell, gap_cell, clad_cell, NaK_cell))
         NaK_u = openmc.Universe(cells=(all_NaK_cell,))
         Ref_u = openmc.Universe(cells=(Ref_cell,))
