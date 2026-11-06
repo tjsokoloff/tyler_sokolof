@@ -869,18 +869,18 @@ fuel_id_groups = {
     6: f_1_IDs + f_2_IDs + f_3_IDs + f_4_IDs + f_6_IDs + f_8_IDs + f_9_IDs + f_12_IDs + f_15_IDs + f_16_IDs + f_23_IDs,
     12: f_5_IDs + f_7_IDs + f_10_IDs + f_11_IDs + f_13_IDs + f_14_IDs + f_17_IDs + f_18_IDs + f_19_IDs + f_20_IDs + f_21_IDs + f_22_IDs}
 
-    for mat in mats_from_geom:
-        if mat.depletable:
-            for multiplier, id_list in fuel_id_groups.items():
-                if mat.id in id_list:
-                    if mat.name == "fuel":
-                        mat.volume = fuel_volume_per_pin * multiplier
-                    elif mat.name == "ceramic":
-                        mat.volume = ceramic_volume_per_pin * multiplier
-                    mats_to_export.append(mat)
-                    break  # no need to check other groups once matched
-        else:
-            mats_to_export.append(mat)
+for mat in mats_from_geom:
+    if mat.depletable:
+        for multiplier, id_list in fuel_id_groups.items():
+            if mat.id in id_list:
+                if mat.name == "fuel":
+                    mat.volume = fuel_volume_per_pin * multiplier
+                elif mat.name == "ceramic":
+                    mat.volume = ceramic_volume_per_pin * multiplier
+                mats_to_export.append(mat)
+                break  # no need to check other groups once matched
+    else:
+        mats_to_export.append(mat)
 
     #### Settings ###
     settings = openmc.Settings()
