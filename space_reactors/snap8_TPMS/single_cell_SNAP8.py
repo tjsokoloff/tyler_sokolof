@@ -34,9 +34,9 @@ height  = 20.0     # set to your fuel height
 fuel_region = Barrel(radius0, height)          # replaces Box(c)
 
 # Barrel wall as a shell, with the same axial limits
-inner = openmc.ZCylinder(r=radius0)
-outer = openmc.ZCylinder(r=radius1)
-zmin  = openmc.ZPlane(-height/2)
+barrel_inner = openmc.ZCylinder(r=radius0)
+barrel_outer = openmc.ZCylinder(r=radius1)
+barrzmin  = openmc.ZPlane(-height/2)
 zmax  = openmc.ZPlane(+height/2)
 wall_region = +inner & -outer & +zmin & -zmax
 
@@ -792,15 +792,15 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     hex1= 13.03
     #radius0 =11
     #radius1 = radius0 + 0.159004
-    #radius3 = 20.18
-    #radius4 = 27.426
+    radius3 = 20.18
+    radius4 = 27.426
 
    # barrel_inner = openmc.ZCylinder(r=radius0)
    # barrel_outer = openmc.ZCylinder(r=radius1)
     bundle_surface = openmc.model.HexagonalPrism(hex0, 'x')
-   # other_surface = openmc.model.HexagonalPrism(hex1, 'x')
-    #outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
-    #outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
+    other_surface = openmc.model.HexagonalPrism(hex1, 'x')
+    outer_ref_top_bot = openmc.model.HexagonalPrism(radius3, 'x')
+    outer_ref_middle = openmc.model.HexagonalPrism(radius4, 'x', boundary_type='vacuum')
     
     Lowergrid = openmc.Cell(fill=lat_lowergrid, region= -barrel_outer & +bottom & -z4)
     Lowerendcap = openmc.Cell(fill=lat_lowerendcap, region=-barrel_outer & +z4 & -core_bottom)
