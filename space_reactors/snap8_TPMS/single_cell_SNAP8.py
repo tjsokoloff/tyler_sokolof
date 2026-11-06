@@ -38,7 +38,7 @@ barrel_inner = openmc.ZCylinder(r=radius0)
 barrel_outer = openmc.ZCylinder(r=radius1)
 barrzmin  = openmc.ZPlane(-height/2)
 zmax  = openmc.ZPlane(+height/2)
-wall_region = +inner & -outer & +zmin & -zmax
+wall_region = +barrel_inner & -barrel_outer & +zmin & -zmax
 
 
 
