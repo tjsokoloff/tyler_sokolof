@@ -558,8 +558,8 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     core_top = openmc.ZPlane(surface_id=12, z0=reactor_top)
     core_bottom = openmc.ZPlane(surface_id=13, z0=reactor_bottom) 
 
-    #top = openmc.ZPlane(surface_id=14, z0=reactor_top + 0.2286 + 0.8738, boundary_type='vacuum')
-    #bottom = openmc.ZPlane(surface_id=15, z0=-1.7602, boundary_type='vacuum') 
+    top = openmc.ZPlane(surface_id=14, z0=reactor_top + 0.2286 + 0.8738, boundary_type='vacuum')
+    bottom = openmc.ZPlane(surface_id=15, z0=-1.7602, boundary_type='vacuum') 
 
     #fuel_volume_per_pin = math.pi * 0.67564 * 0.67564 * axial_section_height / 100  
     #ceramic_volume_per_pin = math.pi * ((0.681 * 0.681) - (0.67564*0.67564)) * axial_section_height / 100
