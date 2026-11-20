@@ -1,6 +1,5 @@
-from pprint import pprint
+#SNAP-REACTORS/snapReactors/reactor_models/Wet_Experiment_Models/OpenMC_Cardinal/standard_conditions/SNAP_ref.pyfrom pprint import pprint
 from argparse import ArgumentParser
-
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,6 +8,18 @@ import openmc
 import openmc.lib
 import sys
 import os
+#from TPMS
+from openmc import volume
+from matplotlib import pyplot as plt
+from warnings import warn
+
+# Choose the algorithm: "brent", "bisection", "toms748", "newton"
+os.environ["TPMS_SOLVER"] = "brent"
+# Choose the root search mechanism: "derivatives" (--> original Ferney) or "subintervals" (-->new)
+os.environ["TPMS_BRACKET"] = "subintervals"    
+# Choose the number of subintervals you want in case you chose the "subintervals" method
+os.environ["TPMS_N_SUBINTERVALS"]  = "2"  
+
 
 openmc.config['cross_sections'] = "/home/tjsok/TPMS/openmc-workshop/endfb-viii.1-hdf5/cross_sections.xml"
 r_fuel = 10
