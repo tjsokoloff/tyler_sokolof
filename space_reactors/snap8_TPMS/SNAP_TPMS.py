@@ -11,8 +11,8 @@ import sys
 import os
 
 openmc.config['cross_sections'] = "/home/tjsok/TPMS/openmc-workshop/endfb-viii.1-hdf5/cross_sections.xml"
-r_fuel = 1
-fuel_diameter = 0.0135128                # diameter of fuel compacts (m)
+r_fuel = 10
+fuel_diameter = 2 * r_fuel                 # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
 height = 0.3594877527127572       # SNAP height of the full core (m)
 
@@ -123,7 +123,7 @@ reactor_height = height * m
 active_height = height * m
 fuel_diameter = fuel_diameter * m
 reactor_top = reactor_bottom + reactor_height
-cell_pitch = fuel_to_coolant_distance * m
+cell_pitch = r_fuel * m
 bottom_grid = reactor_bottom - 0.7950 - 0.9652
 bottom_endcap = reactor_bottom - 0.7950
 top_endcap = reactor_top + 0.2286 
@@ -857,7 +857,7 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     #### Settings ###
     settings = openmc.Settings()
     
-    settings.particles = 150
+    settings.particles = 1500
     settings.inactive = 5
     settings.batches = 100
     settings.temperature['method'] = 'interpolation'
