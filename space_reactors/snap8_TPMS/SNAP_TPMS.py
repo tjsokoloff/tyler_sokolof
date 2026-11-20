@@ -22,8 +22,8 @@ os.environ["TPMS_N_SUBINTERVALS"]  = "2"
 
 
 openmc.config['cross_sections'] = "/home/tjsok/TPMS/openmc-workshop/endfb-viii.1-hdf5/cross_sections.xml"
-r_fuel = 10
-fuel_diameter = 2 * r_fuel                 # diameter of fuel compacts (m)
+r_fuel = 7
+fuel_diameter = 1.5 * r_fuel                 # diameter of fuel compacts (m)
 fuel_to_coolant_distance = 0.0146031       # distance between center of fuel compact and coolant channel (m)
 height = 0.3594877527127572       # SNAP height of the full core (m)
 
@@ -516,9 +516,9 @@ def SNAP_openmc(n_ax_zones, n_inactive, n_active, add_entropy_mesh=False):
     model.materials.export_to_xml()
 
     r_pin = openmc.ZCylinder(surface_id=1, r=r_fuel) 
-    ceramic_or = openmc.ZCylinder(surface_id=2, r=r_fuel + 0.02) 
-    clad_ir = openmc.ZCylinder(surface_id=3, r=r_fuel + 0.025) 
-    clad_or = openmc.ZCylinder(surface_id=4, r=r_fuel + 0.08)  
+    ceramic_or = openmc.ZCylinder(surface_id=2, r=r_fuel + 0.5) 
+    clad_ir = openmc.ZCylinder(surface_id=3, r=r_fuel + 0.6) 
+    clad_or = openmc.ZCylinder(surface_id=4, r=r_fuel + 1.6)  
     
     z1 = openmc.ZPlane(surface_id=5, z0=2.1717)
     z2 = openmc.ZPlane(surface_id=6, z0=32.6917) 
